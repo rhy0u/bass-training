@@ -15,8 +15,8 @@ import { Typography } from "@friends/ui/typography";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
-import { signUp, type AuthResult } from "../actions/auth";
 import { FieldError, type FieldRule } from "../../components/field-error";
+import { signUp, type AuthResult } from "../actions/auth";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
