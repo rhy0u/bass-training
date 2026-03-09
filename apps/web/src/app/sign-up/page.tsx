@@ -16,24 +16,18 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
 import { signUp, type AuthResult } from "../actions/auth";
-import { FieldError } from "../../components/field-error";
-import { PasswordHint } from "../../components/password-hint";
+import { FieldError, type FieldRule } from "../../components/field-error";
 
 const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/;
-
-interface FieldErrors {
-  name?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-}
 
 export default function SignUpPage() {
   const t = useTranslations("signUp");
   const [state, formAction, isPending] = useActionState<AuthResult | null, FormData>(signUp, null);
-  const [errors, setErrors] = useState<FieldErrors>({});
+  const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   useEffect(() => {
     if (state?.error) {
@@ -41,41 +35,57 @@ export default function SignUpPage() {
     }
   }, [state, t]);
 
-  function validate(formData: FormData): FieldErrors {
-    const errs: FieldErrors = {};
-    const name = (formData.get("name") as string)?.trim();
-    const email = (formData.get("email") as string)?.trim();
-    const pwd = formData.get("password") as string;
-    const confirmPassword = formData.get("confirmPassword") as string;
+  function nameRules(): FieldRule[] {
+    if (!submitted && !name) return [];
+    return [{ label: t("nameRequired"), valid: name.trim().length > 0 }];
+  }
 
-    if (!name) errs.name = t("nameRequired");
-    if (!email) errs.email = t("emailRequired");
-    else if (!EMAIL_REGEX.test(email)) errs.email = t("emailInvalid");
-    if (!pwd) errs.password = t("passwordRequired");
-    else if (!PASSWORD_REGEX.test(pwd)) errs.password = t("passwordInvalid");
-    if (!confirmPassword) errs.confirmPassword = t("confirmPasswordRequired");
-    else if (pwd !== confirmPassword) errs.confirmPassword = t("passwordsMismatch");
+  function emailRules(): FieldRule[] {
+    if (!submitted && !email) return [];
+    const rules: FieldRule[] = [{ label: t("emailRequired"), valid: email.trim().length > 0 }];
+    if (email.trim().length > 0) {
+      rules.push({ label: t("emailInvalid"), valid: EMAIL_REGEX.test(email.trim()) });
+    }
+    return rules;
+  }
 
-    return errs;
+  function passwordRules(): FieldRule[] {
+    if (!submitted && !password) return [];
+    return [
+      { label: t("hintMinLength"), valid: password.length >= 8 },
+      { label: t("hintUppercase"), valid: /[A-Z]/.test(password) },
+      { label: t("hintLowercase"), valid: /[a-z]/.test(password) },
+      { label: t("hintNumber"), valid: /\d/.test(password) },
+      { label: t("hintSpecial"), valid: /[^a-zA-Z0-9]/.test(password) },
+    ];
+  }
+
+  function confirmPasswordRules(): FieldRule[] {
+    if (!submitted && !confirmPassword) return [];
+    const rules: FieldRule[] = [
+      { label: t("confirmPasswordRequired"), valid: confirmPassword.length > 0 },
+    ];
+    if (confirmPassword.length > 0) {
+      rules.push({ label: t("passwordsMismatch"), valid: password === confirmPassword });
+    }
+    return rules;
   }
 
   function handleSubmit(formData: FormData) {
-    const errs = validate(formData);
-    setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
+    setSubmitted(true);
+    const allRules = [
+      ...nameRules(),
+      ...emailRules(),
+      ...passwordRules(),
+      ...confirmPasswordRules(),
+    ];
+    if (allRules.some((r) => !r.valid)) return;
     formAction(formData);
   }
 
-  const inputClass = (field: keyof FieldErrors) =>
-    errors[field] ? "border-red-500 focus:border-red-500" : "";
-
-  const passwordHintTranslations = {
-    minLength: t("hintMinLength"),
-    uppercase: t("hintUppercase"),
-    lowercase: t("hintLowercase"),
-    number: t("hintNumber"),
-    special: t("hintSpecial"),
-  };
+  const hasError = (rules: FieldRule[]) => rules.some((r) => !r.valid);
+  const inputClass = (rules: FieldRule[]) =>
+    hasError(rules) ? "border-red-500 focus:border-red-500" : "";
 
   return (
     <main className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center px-3 xs:px-4 md:min-h-[calc(100vh-4rem)]">
@@ -99,9 +109,10 @@ export default function SignUpPage() {
                 id="name"
                 name="name"
                 placeholder={t("namePlaceholder")}
-                className={inputClass("name")}
+                className={inputClass(nameRules())}
+                onChange={(e) => setName(e.target.value)}
               />
-              <FieldError message={errors.name} />
+              <FieldError rules={nameRules()} />
             </div>
             <div>
               <label htmlFor="email" className="mb-1 block text-sm font-medium text-foreground">
@@ -112,9 +123,10 @@ export default function SignUpPage() {
                 name="email"
                 type="email"
                 placeholder={t("emailPlaceholder")}
-                className={inputClass("email")}
+                className={inputClass(emailRules())}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <FieldError message={errors.email} />
+              <FieldError rules={emailRules()} />
             </div>
             <div>
               <label htmlFor="password" className="mb-1 block text-sm font-medium text-foreground">
@@ -125,11 +137,10 @@ export default function SignUpPage() {
                 name="password"
                 type="password"
                 placeholder={t("passwordPlaceholder")}
-                className={inputClass("password")}
+                className={inputClass(passwordRules())}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <FieldError message={errors.password} />
-              <PasswordHint password={password} translations={passwordHintTranslations} />
+              <FieldError rules={passwordRules()} />
             </div>
             <div>
               <label
@@ -143,9 +154,10 @@ export default function SignUpPage() {
                 name="confirmPassword"
                 type="password"
                 placeholder={t("confirmPasswordPlaceholder")}
-                className={inputClass("confirmPassword")}
+                className={inputClass(confirmPasswordRules())}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <FieldError message={errors.confirmPassword} />
+              <FieldError rules={confirmPasswordRules()} />
             </div>
           </CardContent>
           <CardFooter className="flex-col gap-3">
