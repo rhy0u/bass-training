@@ -15,13 +15,20 @@
     "./separator": "./src/separator/index.tsx",
     "./typography": "./src/typography/index.tsx",
     "./card": "./src/card/index.tsx",
+    "./confirm-dialog": "./src/confirm-dialog/index.tsx",
     "./avatar": "./src/avatar/index.tsx",
+    "./menu": "./src/menu/index.tsx",
     "./toaster": "./src/toaster/index.tsx",
     "./tailwind.preset": "./tailwind.preset.ts"
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:a11y": "vitest run --project storybook",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -31,17 +38,26 @@
     "@base-ui/react": "^1.2.0"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
+    "@storybook/addon-a11y": "10.2.16",
+    "@storybook/addon-docs": "10.2.16",
+    "@storybook/addon-vitest": "10.2.16",
     "@storybook/react": "^10.2.16",
     "@storybook/react-vite": "^10.2.16",
     "@tailwindcss/vite": "^4.2.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^5.1.4",
+    "@vitest/browser": "^4.0.0",
+    "@vitest/browser-playwright": "^4.0.0",
+    "@vitest/coverage-v8": "^4.0.0",
+    "playwright": "^1.58.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "storybook": "^10.2.16",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.7.0",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vitest": "^4.0.0"
   }
 }

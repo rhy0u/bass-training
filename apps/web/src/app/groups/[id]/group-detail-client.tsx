@@ -11,17 +11,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@friends/ui/card";
+import { ConfirmDialog } from "@friends/ui/confirm-dialog";
 import { Input } from "@friends/ui/input";
 import { Separator } from "@friends/ui/separator";
 import { toast } from "@friends/ui/toaster";
+import { Typography } from "@friends/ui/typography";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useActionState, useEffect } from "react";
+import { useActionState, useCallback, useEffect, useRef, useState } from "react";
 import {
   addMember,
   deleteGroup,
   removeMember,
   updateGroup,
+  updateGroupAvatar,
   type GroupResult,
 } from "../../actions/groups";
 
@@ -36,6 +39,7 @@ interface Member {
 interface GroupDetail {
   id: string;
   name: string;
+  avatar: string | null;
   ownerId: string;
   ownerName: string;
   isOwner: boolean;
@@ -45,6 +49,11 @@ interface GroupDetail {
 
 export function GroupDetailClient({ group }: { group: GroupDetail }) {
   const t = useTranslations("groupDetail");
+
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [removeMemberTarget, setRemoveMemberTarget] = useState<string | null>(null);
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(group.avatar);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [updateState, updateAction, updatePending] = useActionState<GroupResult | null, FormData>(
     updateGroup,
@@ -68,29 +77,28 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
     }
   };
 
-  const handleRemoveMember = async (userId: string) => {
-    const isSelf = userId === group.currentUserId;
-    const message = isSelf ? t("leaveConfirm") : t("removeMemberConfirm");
-    if (!window.confirm(message)) return;
-
-    const result = await removeMember(group.id, userId);
+  const confirmRemoveMember = useCallback(async () => {
+    if (!removeMemberTarget) return;
+    const isSelf = removeMemberTarget === group.currentUserId;
+    const result = await removeMember(group.id, removeMemberTarget);
+    setRemoveMemberTarget(null);
     if (result.error) {
       toast(t("error"), { description: result.error, type: "error" });
     } else {
       toast(isSelf ? t("left") : t("memberRemoved"), { type: "success" });
     }
-  };
+  }, [removeMemberTarget, group.id, group.currentUserId, t]);
 
-  const handleDelete = async () => {
-    if (!window.confirm(t("deleteConfirm"))) return;
+  const confirmDelete = useCallback(async () => {
+    setDeleteDialogOpen(false);
     const result = await deleteGroup(group.id);
     if (result?.error) {
       toast(t("error"), { description: result.error, type: "error" });
     }
-  };
+  }, [group.id, t]);
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
+    <main className="mx-auto max-w-3xl px-3 py-6 xs:px-4 md:py-8">
       <div className="mb-4">
         <Link href="/groups" className="text-sm text-foreground-secondary hover:text-foreground">
           ← {t("backToGroups")}
@@ -100,10 +108,15 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
       {/* Group info card */}
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>{group.name}</CardTitle>
-          <CardDescription>
-            {t("owner")}: {group.ownerName} · {t("members", { count: group.members.length })}
-          </CardDescription>
+          <div className="flex items-center gap-3 md:gap-4">
+            <Avatar src={avatarPreview} fallback={group.name} size="xl" />
+            <div className="flex-1">
+              <CardTitle>{group.name}</CardTitle>
+              <CardDescription>
+                {t("owner")}: {group.ownerName} · {t("members", { count: group.members.length })}
+              </CardDescription>
+            </div>
+          </div>
         </CardHeader>
 
         {group.isOwner && (
@@ -111,6 +124,40 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
             <CardContent>
               <form id="update-group-form" action={updateAction} className="space-y-4">
                 <input type="hidden" name="groupId" value={group.id} />
+                <div>
+                  <label
+                    htmlFor="group-avatar"
+                    className="mb-1 block text-sm font-medium text-foreground"
+                  >
+                    {t("changeAvatar")}
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => fileInputRef.current?.click()}
+                    >
+                      {t("changeAvatar")}
+                    </Button>
+                    <input
+                      ref={fileInputRef}
+                      id="group-avatar"
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="hidden"
+                      onChange={async (e) => {
+                        const file = e.target.files?.[0];
+                        if (!file) return;
+                        setAvatarPreview(URL.createObjectURL(file));
+                        const fd = new FormData();
+                        fd.append("groupId", group.id);
+                        fd.append("avatar", file);
+                        await updateGroupAvatar(null, fd);
+                      }}
+                    />
+                  </div>
+                </div>
                 <div>
                   <label
                     htmlFor="group-name"
@@ -129,11 +176,11 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
                 </div>
               </form>
             </CardContent>
-            <CardFooter className="justify-between">
+            <CardFooter className="flex-wrap justify-between gap-2">
               <Button
                 variant="ghost"
                 className="text-red-500 hover:bg-red-50 hover:text-red-600"
-                onClick={handleDelete}
+                onClick={() => setDeleteDialogOpen(true)}
               >
                 {t("deleteGroup")}
               </Button>
@@ -149,7 +196,7 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
             <Button
               variant="ghost"
               className="text-red-500 hover:bg-red-50 hover:text-red-600"
-              onClick={() => handleRemoveMember(group.currentUserId)}
+              onClick={() => setRemoveMemberTarget(group.currentUserId)}
             >
               {t("leaveGroup")}
             </Button>
@@ -183,20 +230,26 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
             {group.members.map((member) => (
               <div
                 key={member.id}
-                className="flex items-center justify-between rounded-lg border border-border p-3"
+                className="flex items-center justify-between gap-2 rounded-lg border border-border p-2 xs:p-3"
               >
                 <div className="flex items-center gap-3">
                   <Avatar src={member.avatar} fallback={member.name ?? member.email} size="sm" />
                   <div>
-                    <p className="text-sm font-medium text-foreground">
+                    <Typography variant="body-sm" className="font-medium text-foreground">
                       {member.name ?? member.email}
                       {member.isOwner && (
-                        <span className="ml-2 text-xs text-foreground-secondary">
+                        <Typography
+                          as="span"
+                          variant="caption"
+                          className="ml-2 text-foreground-secondary"
+                        >
                           ({t("ownerBadge")})
-                        </span>
+                        </Typography>
                       )}
-                    </p>
-                    <p className="text-xs text-foreground-secondary">{member.email}</p>
+                    </Typography>
+                    <Typography variant="caption" className="text-foreground-secondary">
+                      {member.email}
+                    </Typography>
                   </div>
                 </div>
                 {group.isOwner && !member.isOwner && (
@@ -204,7 +257,7 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
                     variant="ghost"
                     size="sm"
                     className="text-red-500 hover:bg-red-50 hover:text-red-600"
-                    onClick={() => handleRemoveMember(member.id)}
+                    onClick={() => setRemoveMemberTarget(member.id)}
                   >
                     {t("remove")}
                   </Button>
@@ -214,6 +267,34 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
           </div>
         </CardContent>
       </Card>
+
+      {/* Delete group confirmation dialog */}
+      <ConfirmDialog
+        open={deleteDialogOpen}
+        onOpenChange={setDeleteDialogOpen}
+        title={t("deleteGroup")}
+        description={t("deleteConfirm")}
+        cancelLabel={t("cancel")}
+        confirmLabel={t("confirm")}
+        onConfirm={confirmDelete}
+        variant="danger"
+      />
+
+      {/* Remove member / leave group confirmation dialog */}
+      <ConfirmDialog
+        open={removeMemberTarget !== null}
+        onOpenChange={(open) => {
+          if (!open) setRemoveMemberTarget(null);
+        }}
+        title={removeMemberTarget === group.currentUserId ? t("leaveGroup") : t("remove")}
+        description={
+          removeMemberTarget === group.currentUserId ? t("leaveConfirm") : t("removeMemberConfirm")
+        }
+        cancelLabel={t("cancel")}
+        confirmLabel={t("confirm")}
+        onConfirm={confirmRemoveMember}
+        variant="danger"
+      />
     </main>
   );
 }

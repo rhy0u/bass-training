@@ -2,6 +2,7 @@ import type { Preview } from "@storybook/react";
 import "../src/storybook.css";
 
 const preview: Preview = {
+  tags: ["autodocs"],
   parameters: {
     controls: {
       matchers: {
@@ -15,6 +16,9 @@ const preview: Preview = {
         { name: "light", value: "#ffffff" },
         { name: "dark", value: "#0a0a0a" },
       ],
+    },
+    docs: {
+      toc: true,
     },
   },
 };

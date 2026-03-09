@@ -13,6 +13,7 @@ import {
 import { Input } from "@friends/ui/input";
 import { Separator } from "@friends/ui/separator";
 import { toast } from "@friends/ui/toaster";
+import { Typography } from "@friends/ui/typography";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { deleteAccount, updateAvatar, updateProfile, type ProfileResult } from "../actions/profile";
@@ -65,7 +66,7 @@ export function ProfilePageClient({ user }: ProfilePageClientProps) {
   };
 
   return (
-    <main className="mx-auto max-w-2xl px-4 py-8">
+    <main className="mx-auto max-w-2xl px-3 py-6 xs:px-4 md:py-8">
       <Card>
         <CardHeader>
           <CardTitle>{t("title")}</CardTitle>
@@ -74,7 +75,7 @@ export function ProfilePageClient({ user }: ProfilePageClientProps) {
 
         <CardContent className="space-y-6">
           {/* Avatar section */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             <Avatar src={avatarPreview} fallback={user.name ?? user.email} size="xl" />
             <div>
               <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
@@ -87,7 +88,9 @@ export function ProfilePageClient({ user }: ProfilePageClientProps) {
                 className="hidden"
                 onChange={handleAvatarChange}
               />
-              <p className="mt-1 text-xs text-foreground-muted">{t("avatarHint")}</p>
+              <Typography variant="caption" className="mt-1">
+                {t("avatarHint")}
+              </Typography>
             </div>
           </div>
 
@@ -95,8 +98,16 @@ export function ProfilePageClient({ user }: ProfilePageClientProps) {
 
           {/* Profile form */}
           <form id="profile-form" action={profileAction} key={formKey} className="space-y-4">
-            {profileState?.error && <p className="text-sm text-red-500">{profileState.error}</p>}
-            {profileState?.success && <p className="text-sm text-green-600">{t("saved")}</p>}
+            {profileState?.error && (
+              <Typography variant="body-sm" className="text-red-500">
+                {profileState.error}
+              </Typography>
+            )}
+            {profileState?.success && (
+              <Typography variant="body-sm" className="text-green-600">
+                {t("saved")}
+              </Typography>
+            )}
             <div>
               <label htmlFor="name" className="mb-1 block text-sm font-medium text-foreground">
                 {t("name")}
@@ -125,7 +136,7 @@ export function ProfilePageClient({ user }: ProfilePageClientProps) {
           </form>
         </CardContent>
 
-        <CardFooter className="justify-between">
+        <CardFooter className="flex-wrap justify-between gap-2">
           <Button
             variant="ghost"
             className="text-red-500 hover:bg-red-50 hover:text-red-600"

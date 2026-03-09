@@ -31,6 +31,7 @@ export default async function GroupDetailPage({ params }: { params: Promise<{ id
   const serialized = {
     id: group.id,
     name: group.name,
+    avatar: group.avatar,
     ownerId: group.ownerId,
     ownerName: group.owner.name ?? group.owner.email,
     isOwner: group.ownerId === user.id,

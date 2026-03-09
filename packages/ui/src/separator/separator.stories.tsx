@@ -1,11 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Separator } from ".";
 
+/**
+ * Visual divider between sections of content.
+ *
+ * Renders as a thin line, either horizontal (default) or vertical.
+ */
 const meta: Meta<typeof Separator> = {
   title: "Components/Separator",
   component: Separator,
   argTypes: {
-    orientation: { control: "select", options: ["horizontal", "vertical"] },
+    orientation: {
+      description: "Direction of the separator",
+      control: "select",
+      options: ["horizontal", "vertical"],
+      table: { defaultValue: { summary: "horizontal" } },
+    },
   },
 };
 export default meta;

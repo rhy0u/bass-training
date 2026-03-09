@@ -5,6 +5,15 @@ const preset: Config = {
   content: [],
   theme: {
     extend: {
+      /* ── Screens (breakpoints) ─────────────────────── */
+      screens: {
+        xs: "375px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+      },
+
       /* ── Colors ────────────────────────────────────── */
       colors: {
         brand: {
@@ -52,9 +61,9 @@ const preset: Config = {
         mono: ["JetBrains Mono", "Fira Code", "Consolas", "monospace"],
       },
       fontSize: {
-        h1: ["2.25rem", { lineHeight: "2.75rem", letterSpacing: "-0.025em", fontWeight: "700" }],
-        h2: ["1.75rem", { lineHeight: "2.25rem", letterSpacing: "-0.02em", fontWeight: "600" }],
-        h3: ["1.375rem", { lineHeight: "1.875rem", letterSpacing: "-0.015em", fontWeight: "600" }],
+        h1: ["1.75rem", { lineHeight: "2.25rem", letterSpacing: "-0.025em", fontWeight: "700" }],
+        h2: ["1.5rem", { lineHeight: "2rem", letterSpacing: "-0.02em", fontWeight: "600" }],
+        h3: ["1.25rem", { lineHeight: "1.75rem", letterSpacing: "-0.015em", fontWeight: "600" }],
         body: ["1rem", { lineHeight: "1.625rem", fontWeight: "400" }],
         "body-sm": ["0.875rem", { lineHeight: "1.375rem", fontWeight: "400" }],
         caption: ["0.75rem", { lineHeight: "1rem", fontWeight: "400" }],

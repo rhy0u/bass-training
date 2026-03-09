@@ -3,10 +3,57 @@
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import { ComponentPropsWithoutRef, forwardRef } from "react";
 
+type DialogButtonVariant = "solid" | "ghost";
+type DialogButtonSize = "sm" | "md" | "lg";
+
+const buttonBase =
+  "inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 disabled:pointer-events-none disabled:opacity-50";
+
+const buttonVariantStyles: Record<DialogButtonVariant, string> = {
+  solid: "bg-foreground text-surface hover:opacity-90 active:opacity-80",
+  ghost: "text-foreground hover:bg-surface-secondary active:bg-surface-tertiary",
+};
+
+const buttonSizeStyles: Record<DialogButtonSize, string> = {
+  sm: "h-8 px-3 text-sm",
+  md: "h-10 px-4 text-sm",
+  lg: "h-12 px-6 text-base",
+};
+
 export const DialogRoot = BaseDialog.Root;
-export const DialogTrigger = BaseDialog.Trigger;
-export const DialogClose = BaseDialog.Close;
 export const DialogPortal = BaseDialog.Portal;
+
+interface DialogTriggerProps extends ComponentPropsWithoutRef<typeof BaseDialog.Trigger> {
+  variant?: DialogButtonVariant;
+  size?: DialogButtonSize;
+}
+
+export const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
+  ({ variant = "solid", size = "sm", className = "", ...props }, ref) => (
+    <BaseDialog.Trigger
+      ref={ref}
+      className={`${buttonBase} ${buttonVariantStyles[variant]} ${buttonSizeStyles[size]} ${className}`}
+      {...props}
+    />
+  ),
+);
+DialogTrigger.displayName = "DialogTrigger";
+
+interface DialogCloseProps extends ComponentPropsWithoutRef<typeof BaseDialog.Close> {
+  variant?: DialogButtonVariant;
+  size?: DialogButtonSize;
+}
+
+export const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
+  ({ variant = "ghost", size = "sm", className = "", ...props }, ref) => (
+    <BaseDialog.Close
+      ref={ref}
+      className={`${buttonBase} ${buttonVariantStyles[variant]} ${buttonSizeStyles[size]} ${className}`}
+      {...props}
+    />
+  ),
+);
+DialogClose.displayName = "DialogClose";
 
 export const DialogBackdrop = forwardRef<
   HTMLDivElement,

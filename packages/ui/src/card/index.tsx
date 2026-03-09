@@ -1,5 +1,3 @@
-"use client";
-
 import { ComponentPropsWithoutRef, forwardRef } from "react";
 
 export type CardProps = ComponentPropsWithoutRef<"div">;

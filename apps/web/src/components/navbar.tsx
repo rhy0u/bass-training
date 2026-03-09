@@ -2,6 +2,15 @@
 
 import { Avatar } from "@friends/ui/avatar";
 import { Button } from "@friends/ui/button";
+import {
+  MenuLinkItem,
+  MenuPopup,
+  MenuPortal,
+  MenuPositioner,
+  MenuRoot,
+  MenuSeparator,
+  MenuTrigger,
+} from "@friends/ui/menu";
 import Link from "next/link";
 import { useTheme } from "./theme-provider";
 
@@ -22,59 +31,75 @@ interface NavbarProps {
   };
 }
 
+function ThemeToggle({
+  theme,
+  toggle,
+  label,
+}: {
+  theme: string;
+  toggle: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      onClick={toggle}
+      className="rounded-md p-2 text-foreground-secondary hover:bg-surface-secondary hover:text-foreground transition-colors"
+      aria-label={label}
+      title={label}
+    >
+      {theme === "dark" ? (
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+      ) : (
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      )}
+    </button>
+  );
+}
+
 export function Navbar({ user, translations }: NavbarProps) {
   const { theme, toggle } = useTheme();
+  const themeLabel = theme === "dark" ? translations.lightMode : translations.darkMode;
 
   return (
     <nav className="border-b border-border bg-surface">
-      <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4">
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-3 xs:px-4 md:h-16">
         <Link href="/" className="text-lg font-semibold text-foreground">
           {translations.brand}
         </Link>
 
-        <div className="flex items-center gap-3">
-          <button
-            onClick={toggle}
-            className="rounded-md p-2 text-foreground-secondary hover:bg-surface-secondary hover:text-foreground transition-colors"
-            aria-label={theme === "dark" ? translations.lightMode : translations.darkMode}
-            title={theme === "dark" ? translations.lightMode : translations.darkMode}
-          >
-            {theme === "dark" ? (
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-            )}
-          </button>
+        {/* Desktop nav */}
+        <div className="hidden items-center gap-3 md:flex">
+          <ThemeToggle theme={theme} toggle={toggle} label={themeLabel} />
           {user ? (
             <>
               <Link href="/profile">
@@ -103,6 +128,41 @@ export function Navbar({ user, translations }: NavbarProps) {
                 </Button>
               </Link>
             </>
+          ) : (
+            <>
+              <Link href="/sign-in">
+                <Button variant="ghost" size="sm">
+                  {translations.signIn}
+                </Button>
+              </Link>
+              <Link href="/sign-up">
+                <Button size="sm">{translations.signUp}</Button>
+              </Link>
+            </>
+          )}
+        </div>
+
+        {/* Mobile nav */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle theme={theme} toggle={toggle} label={themeLabel} />
+          {user ? (
+            <MenuRoot>
+              <MenuTrigger className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary">
+                <Avatar src={user.avatar} fallback={user.name ?? "?"} size="sm" />
+              </MenuTrigger>
+              <MenuPortal>
+                <MenuPositioner align="end" sideOffset={8}>
+                  <MenuPopup>
+                    <MenuLinkItem href="/groups">{translations.groups}</MenuLinkItem>
+                    <MenuLinkItem href="/profile">{translations.profile}</MenuLinkItem>
+                    <MenuSeparator />
+                    <MenuLinkItem href="/logout" className="text-red-500">
+                      {translations.logout}
+                    </MenuLinkItem>
+                  </MenuPopup>
+                </MenuPositioner>
+              </MenuPortal>
+            </MenuRoot>
           ) : (
             <>
               <Link href="/sign-in">

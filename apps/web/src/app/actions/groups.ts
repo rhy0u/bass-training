@@ -200,3 +200,48 @@ export async function searchUsers(query: string, excludeGroupId?: string) {
 
   return db.user.findMany(where);
 }
+
+export async function updateGroupAvatar(
+  _prev: GroupResult | null,
+  formData: FormData,
+): Promise<GroupResult> {
+  const session = await getSession();
+  if (!session) redirect("/sign-in");
+
+  const groupId = formData.get("groupId") as string;
+  if (!groupId) return { error: "Group ID is required" };
+
+  const group = await db.group.findUnique({
+    where: { id: groupId },
+    select: { ownerId: true },
+  });
+
+  if (!group) return { error: "Group not found" };
+  if (group.ownerId !== session.userId) {
+    return { error: "Only the group owner can change the avatar" };
+  }
+
+  const file = formData.get("avatar") as File | null;
+  if (!file || file.size === 0) return { error: "No file provided" };
+
+  const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+  if (!allowedTypes.includes(file.type)) {
+    return { error: "Only JPEG, PNG, and WebP images are allowed" };
+  }
+  if (file.size > 2 * 1024 * 1024) {
+    return { error: "File must be smaller than 2MB" };
+  }
+
+  const bytes = await file.arrayBuffer();
+  const base64 = Buffer.from(bytes).toString("base64");
+  const dataUri = `data:${file.type};base64,${base64}`;
+
+  await db.group.update({
+    where: { id: groupId },
+    data: { avatar: dataUri },
+  });
+
+  revalidatePath(`/groups/${groupId}`);
+  revalidatePath("/groups");
+  return { success: true };
+}

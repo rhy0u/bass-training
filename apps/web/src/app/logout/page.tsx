@@ -17,7 +17,7 @@ export default function LogoutPage() {
   const t = useTranslations("logout");
 
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
+    <main className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center px-3 xs:px-4 md:min-h-[calc(100vh-4rem)]">
       <Card className="w-full max-w-sm text-center">
         <CardHeader>
           <CardTitle>{t("title")}</CardTitle>

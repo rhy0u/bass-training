@@ -1,8 +1,31 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Toaster, toast } from "./index";
 
+/**
+ * Toast notifications provide brief, non-intrusive feedback about an action.
+ *
+ * Built on **Base UI Toast** primitives, wired through a shared `toastManager`.
+ *
+ * | Type      | Style                                |
+ * | --------- | ------------------------------------ |
+ * | `default` | Neutral (border-border, bg-surface)  |
+ * | `success` | Green accent                         |
+ * | `error`   | Red accent                           |
+ *
+ * ## Usage
+ *
+ * ```tsx
+ * import { Toaster, toast } from "@friends/ui/toaster";
+ *
+ * // Mount once at root
+ * <Toaster />
+ *
+ * // Trigger from anywhere
+ * toast("Saved!", { description: "Your changes are saved.", type: "success" });
+ * ```
+ */
 const meta: Meta<typeof Toaster> = {
-  title: "Toaster",
+  title: "Components/Toaster",
   component: Toaster,
   decorators: [
     (Story) => (

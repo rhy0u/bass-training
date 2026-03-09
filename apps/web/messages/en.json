@@ -97,7 +97,8 @@
     "members": "{count, plural, =1 {1 member} other {# members}}",
     "view": "View",
     "delete": "Delete",
-    "deleteConfirm": "Are you sure you want to delete this group? All members will be removed."
+    "deleteConfirm": "Are you sure you want to delete this group? All members will be removed.",
+    "confirm": "Confirm"
   },
   "groupDetail": {
     "backToGroups": "Back to groups",
@@ -109,6 +110,8 @@
     "saving": "Saving…",
     "saved": "Group updated successfully.",
     "error": "An error occurred",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
     "deleteGroup": "Delete group",
     "deleteConfirm": "Are you sure you want to delete this group?",
     "leaveGroup": "Leave group",
@@ -121,6 +124,7 @@
     "removeMemberConfirm": "Remove this member from the group?",
     "memberRemoved": "Member removed.",
     "remove": "Remove",
-    "ownerBadge": "owner"
+    "ownerBadge": "owner",
+    "changeAvatar": "Change avatar"
   }
 }

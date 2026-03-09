@@ -15,7 +15,19 @@ fi
 echo "📦 Installing dependencies..."
 yarn install
 
-# 3. Start Docker services
+# 3. Generate local HTTPS certificates with mkcert
+echo "🔒 Setting up local HTTPS certificates..."
+if ! command -v mkcert &> /dev/null; then
+  echo "  Installing mkcert..."
+  brew install mkcert
+fi
+mkcert -install
+cd docker/nginx/certs
+mkcert -key-file friends.local.key -cert-file friends.local.crt friends.local localhost 127.0.0.1
+cd -
+echo "✅ Certificates ready"
+
+# 4. Start Docker services
 echo "🐳 Starting Docker services (Postgres, Redis, Nginx)..."
 docker compose up -d
 

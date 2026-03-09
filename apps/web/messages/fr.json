@@ -97,7 +97,8 @@
     "members": "{count, plural, =1 {1 membre} other {# membres}}",
     "view": "Voir",
     "delete": "Supprimer",
-    "deleteConfirm": "Voulez-vous vraiment supprimer ce groupe ? Tous les membres seront retirés."
+    "deleteConfirm": "Voulez-vous vraiment supprimer ce groupe ? Tous les membres seront retirés.",
+    "confirm": "Confirmer"
   },
   "groupDetail": {
     "backToGroups": "Retour aux groupes",
@@ -109,6 +110,8 @@
     "saving": "Enregistrement…",
     "saved": "Groupe mis à jour avec succès.",
     "error": "Une erreur est survenue",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
     "deleteGroup": "Supprimer le groupe",
     "deleteConfirm": "Voulez-vous vraiment supprimer ce groupe ?",
     "leaveGroup": "Quitter le groupe",
@@ -121,6 +124,7 @@
     "removeMemberConfirm": "Retirer ce membre du groupe ?",
     "memberRemoved": "Membre retiré.",
     "remove": "Retirer",
-    "ownerBadge": "propriétaire"
+    "ownerBadge": "propriétaire",
+    "changeAvatar": "Changer l'avatar"
   }
 }

@@ -1,4 +1,5 @@
 import { db } from "@friends/database";
+import { Typography } from "@friends/ui/typography";
 import { getTranslations } from "next-intl/server";
 
 export default async function Home() {
@@ -6,10 +7,10 @@ export default async function Home() {
   const userCount = await db.user.count();
 
   return (
-    <main style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
-      <h1>{t("title")}</h1>
-      <p>{t("welcome")}</p>
-      <p>{t("usersCount", { count: userCount })}</p>
+    <main className="px-4 py-6 mx-auto max-w-3xl md:py-8">
+      <Typography variant="h1">{t("title")}</Typography>
+      <Typography>{t("welcome")}</Typography>
+      <Typography>{t("usersCount", { count: userCount })}</Typography>
     </main>
   );
 }

@@ -24,6 +24,7 @@ export default async function GroupsPage() {
   const serialized = groups.map((g) => ({
     id: g.id,
     name: g.name,
+    avatar: g.avatar,
     ownerId: g.ownerId,
     ownerName: g.owner.name ?? g.owner.id,
     memberCount: g._count.members,

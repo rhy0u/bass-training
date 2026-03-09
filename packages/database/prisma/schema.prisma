@@ -25,6 +25,7 @@ model User {
 model Group {
   id        String   @id @default(cuid())
   name      String
+  avatar    String?
   ownerId   String   @map("owner_id")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

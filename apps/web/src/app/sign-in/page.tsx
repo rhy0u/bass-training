@@ -11,6 +11,7 @@ import {
 } from "@friends/ui/card";
 import { Input } from "@friends/ui/input";
 import { toast } from "@friends/ui/toaster";
+import { Typography } from "@friends/ui/typography";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useActionState, useEffect } from "react";
@@ -27,7 +28,7 @@ export default function SignInPage() {
   }, [state, t]);
 
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4">
+    <main className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center px-3 xs:px-4 md:min-h-[calc(100vh-4rem)]">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>{t("title")}</CardTitle>
@@ -35,7 +36,11 @@ export default function SignInPage() {
         </CardHeader>
         <form action={formAction}>
           <CardContent className="space-y-4">
-            {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
+            {state?.error && (
+              <Typography variant="body-sm" className="text-red-500">
+                {state.error}
+              </Typography>
+            )}
             <div>
               <label htmlFor="email" className="mb-1 block text-sm font-medium text-foreground">
                 {t("email")}
@@ -65,12 +70,12 @@ export default function SignInPage() {
             <Button type="submit" className="w-full" disabled={isPending}>
               {isPending ? t("submitting") : t("submit")}
             </Button>
-            <p className="text-sm text-foreground-secondary">
+            <Typography variant="body-sm">
               {t("noAccount")}{" "}
               <Link href="/sign-up" className="text-brand-600 hover:underline">
                 {t("signUpLink")}
               </Link>
-            </p>
+            </Typography>
           </CardFooter>
         </form>
       </Card>

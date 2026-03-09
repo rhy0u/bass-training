@@ -1,7 +1,9 @@
 "use client";
 
+import { Avatar } from "@friends/ui/avatar";
 import { Button } from "@friends/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@friends/ui/card";
+import { ConfirmDialog } from "@friends/ui/confirm-dialog";
 import {
   DialogBackdrop,
   DialogClose,
@@ -14,6 +16,7 @@ import {
 } from "@friends/ui/dialog";
 import { Input } from "@friends/ui/input";
 import { toast } from "@friends/ui/toaster";
+import { Typography } from "@friends/ui/typography";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
@@ -22,6 +25,7 @@ import { createGroup, deleteGroup, type GroupResult } from "../actions/groups";
 interface GroupSummary {
   id: string;
   name: string;
+  avatar: string | null;
   ownerId: string;
   ownerName: string;
   memberCount: number;
@@ -31,6 +35,7 @@ interface GroupSummary {
 export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
   const t = useTranslations("groups");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   const [createState, createAction, createPending] = useActionState<GroupResult | null, FormData>(
     createGroup,
@@ -47,23 +52,28 @@ export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
   }, [createState, t]);
 
   const handleDelete = async (groupId: string) => {
-    if (!window.confirm(t("deleteConfirm"))) return;
-    const result = await deleteGroup(groupId);
+    setDeleteTarget(groupId);
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleteTarget(null);
+    const result = await deleteGroup(deleteTarget);
     if (result?.error) {
       toast(t("error"), { description: result.error, type: "error" });
     }
   };
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-8">
+    <main className="mx-auto max-w-3xl px-3 py-6 xs:px-4 md:py-8">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">{t("title")}</h1>
-          <p className="text-sm text-foreground-secondary">{t("description")}</p>
+          <Typography variant="h1">{t("title")}</Typography>
+          <Typography variant="body-sm">{t("description")}</Typography>
         </div>
 
         <DialogRoot open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger render={<Button size="sm" />}>{t("create")}</DialogTrigger>
+          <DialogTrigger>{t("create")}</DialogTrigger>
           <DialogPortal>
             <DialogBackdrop />
             <DialogPopup>
@@ -86,9 +96,7 @@ export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
                   />
                 </div>
                 <div className="flex justify-end gap-2">
-                  <DialogClose render={<Button variant="ghost" type="button" />}>
-                    {t("cancel")}
-                  </DialogClose>
+                  <DialogClose type="button">{t("cancel")}</DialogClose>
                   <Button type="submit" disabled={createPending}>
                     {createPending ? t("creating") : t("create")}
                   </Button>
@@ -109,18 +117,28 @@ export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
         <div className="space-y-3">
           {groups.map((group) => (
             <Card key={group.id}>
-              <CardHeader className="flex-row items-center justify-between pb-2">
-                <div>
-                  <CardTitle className="text-lg">
-                    <Link href={`/groups/${group.id}`} className="hover:underline">
-                      {group.name}
-                    </Link>
-                  </CardTitle>
-                  <CardDescription>
-                    {t("owner")}: {group.ownerName} · {t("members", { count: group.memberCount })}
-                  </CardDescription>
+              <CardHeader className="flex-row items-center justify-between gap-2 pb-2">
+                <div className="flex min-w-0 items-center gap-2 xs:gap-3">
+                  <Link href={`/groups/${group.id}`}>
+                    <Avatar
+                      src={group.avatar}
+                      fallback={group.name}
+                      size="sm"
+                      className="md:h-12 md:w-12 md:text-base"
+                    />
+                  </Link>
+                  <div>
+                    <CardTitle className="text-lg">
+                      <Link href={`/groups/${group.id}`} className="hover:underline">
+                        {group.name}
+                      </Link>
+                    </CardTitle>
+                    <CardDescription>
+                      {t("owner")}: {group.ownerName} · {t("members", { count: group.memberCount })}
+                    </CardDescription>
+                  </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex shrink-0 gap-1 xs:gap-2">
                   <Link
                     href={`/groups/${group.id}`}
                     className="inline-flex h-8 items-center justify-center rounded-md border border-border px-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-secondary"
@@ -143,6 +161,20 @@ export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
           ))}
         </div>
       )}
+
+      {/* Delete group confirmation dialog */}
+      <ConfirmDialog
+        open={deleteTarget !== null}
+        onOpenChange={(open) => {
+          if (!open) setDeleteTarget(null);
+        }}
+        title={t("delete")}
+        description={t("deleteConfirm")}
+        cancelLabel={t("cancel")}
+        confirmLabel={t("confirm")}
+        onConfirm={confirmDelete}
+        variant="danger"
+      />
     </main>
   );
 }

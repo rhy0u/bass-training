@@ -3,6 +3,7 @@
 import { searchUsers } from "@/app/actions/groups";
 import { Avatar } from "@friends/ui/avatar";
 import { Input } from "@friends/ui/input";
+import { Typography } from "@friends/ui/typography";
 import { useEffect, useRef, useState, useTransition } from "react";
 
 interface UserResult {
@@ -92,10 +93,12 @@ export function UserAutocomplete({ excludeGroupId, onSelect, placeholder }: User
             >
               <Avatar src={user.avatar} fallback={user.name ?? user.email} size="sm" />
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-foreground">
+                <Typography variant="body-sm" className="truncate font-medium text-foreground">
                   {user.name ?? user.email}
-                </p>
-                <p className="truncate text-xs text-foreground-secondary">{user.email}</p>
+                </Typography>
+                <Typography variant="caption" className="truncate text-foreground-secondary">
+                  {user.email}
+                </Typography>
               </div>
             </button>
           ))}
