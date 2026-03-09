@@ -52,7 +52,10 @@ export async function signUp(_prev: AuthResult | null, formData: FormData): Prom
 
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/;
   if (!passwordRegex.test(password)) {
-    return { error: "Password must be at least 8 characters with uppercase, lowercase, number, and special character" };
+    return {
+      error:
+        "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
+    };
   }
 
   const existing = await db.user.findUnique({ where: { email } });

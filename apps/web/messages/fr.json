@@ -43,6 +43,7 @@
     "email": "E-mail",
     "emailPlaceholder": "vous@exemple.com",
     "emailRequired": "L'e-mail est requis.",
+    "emailInvalid": "Veuillez entrer une adresse e-mail valide.",
     "password": "Mot de passe",
     "passwordPlaceholder": "••••••••",
     "passwordRequired": "Le mot de passe est requis.",
