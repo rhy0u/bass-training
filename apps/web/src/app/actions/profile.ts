@@ -53,8 +53,12 @@ export async function updatePassword(
     return { error: "Both fields are required" };
   }
 
-  if (newPassword.length < 8) {
-    return { error: "Password must be at least 8 characters" };
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/;
+  if (!passwordRegex.test(newPassword)) {
+    return {
+      error:
+        "Password must be at least 8 characters with uppercase, lowercase, number, and special character",
+    };
   }
 
   const user = await db.user.findUnique({ where: { id: session.userId } });

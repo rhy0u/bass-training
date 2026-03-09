@@ -28,6 +28,8 @@ export default async function GroupDetailPage({ params }: { params: Promise<{ id
   const isMember = group.members.some((m) => m.user.id === user.id);
   if (!isMember) notFound();
 
+  const currentMember = group.members.find((m) => m.user.id === user.id)!;
+
   const serialized = {
     id: group.id,
     name: group.name,
@@ -35,12 +37,14 @@ export default async function GroupDetailPage({ params }: { params: Promise<{ id
     ownerId: group.ownerId,
     ownerName: group.owner.name ?? group.owner.email,
     isOwner: group.ownerId === user.id,
+    isAdmin: currentMember.role === "ADMIN" || group.ownerId === user.id,
     members: group.members.map((m) => ({
       id: m.user.id,
       name: m.user.name,
       email: m.user.email,
       avatar: m.user.avatar,
       isOwner: m.user.id === group.ownerId,
+      role: m.role,
     })),
     currentUserId: user.id,
   };

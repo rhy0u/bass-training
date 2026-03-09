@@ -15,7 +15,7 @@ import { toast } from "@friends/ui/toaster";
 import { Typography } from "@friends/ui/typography";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect } from "react";
-import { signIn, type AuthResult } from "../actions/auth";
+import { signIn, type AuthResult } from "../../actions/auth";
 
 export default function SignInPage() {
   const t = useTranslations("signIn");

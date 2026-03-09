@@ -28,7 +28,7 @@ import {
   updateGroupAvatar,
   updateMemberRole,
   type GroupResult,
-} from "../../actions/groups";
+} from "../../../actions/groups";
 
 interface Member {
   id: string;

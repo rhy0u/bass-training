@@ -15,9 +15,11 @@
     "profile": "Profile",
     "logout": "Logout",
     "groups": "Groups",
+    "notifications": "Notifications",
     "userMenu": "User menu",
     "lightMode": "Switch to light mode",
-    "darkMode": "Switch to dark mode"
+    "darkMode": "Switch to dark mode",
+    "language": "Change language"
   },
   "signIn": {
     "title": "Sign in",
@@ -87,7 +89,21 @@
     "saved": "Profile updated successfully.",
     "error": "Update failed",
     "deleteAccount": "Delete account",
-    "deleteConfirm": "Are you sure you want to delete your account? This action cannot be undone."
+    "deleteConfirm": "Are you sure you want to delete your account? This action cannot be undone.",
+    "changePassword": "Change password",
+    "changePasswordDescription": "Update your account password.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "confirmNewPasswordRequired": "Please confirm your new password.",
+    "passwordsMismatch": "Passwords do not match.",
+    "hintMinLength": "At least 8 characters",
+    "hintUppercase": "One uppercase letter",
+    "hintLowercase": "One lowercase letter",
+    "hintNumber": "One number",
+    "hintSpecial": "One special character",
+    "changePasswordSubmit": "Update password",
+    "passwordChanged": "Password updated successfully."
   },
   "groups": {
     "title": "Groups",
@@ -134,6 +150,36 @@
     "memberRemoved": "Member removed.",
     "remove": "Remove",
     "ownerBadge": "owner",
-    "changeAvatar": "Change avatar"
+    "adminBadge": "admin",
+    "changeAvatar": "Change avatar",
+    "makeAdmin": "Make admin",
+    "removeAdmin": "Remove admin",
+    "roleUpdated": "Role updated.",
+    "createInvite": "Invite link",
+    "inviteLink": "Share this link to invite people:",
+    "inviteCopied": "Invite link copied to clipboard.",
+    "copy": "Copy"
+  },
+  "joinGroup": {
+    "title": "Join group",
+    "description": "{inviter} invited you to join {group}.",
+    "someone": "Someone",
+    "members": "{count, plural, =1 {1 member} other {# members}}",
+    "join": "Join group",
+    "joining": "Joining…",
+    "joined": "You joined the group!",
+    "error": "Failed to join",
+    "signInRequired": "Sign in to join this group.",
+    "signIn": "Sign in"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "description": "Stay up to date with your groups.",
+    "empty": "No notifications yet.",
+    "markAllRead": "Mark all as read",
+    "justNow": "Just now",
+    "minutesAgo": "{count, plural, =1 {1 minute ago} other {# minutes ago}}",
+    "hoursAgo": "{count, plural, =1 {1 hour ago} other {# hours ago}}",
+    "daysAgo": "{count, plural, =1 {1 day ago} other {# days ago}}"
   }
 }

@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from "@friends/ui/card";
 import { useTranslations } from "next-intl";
-import { signOut } from "../actions/auth";
+import { signOut } from "../../actions/auth";
 
 export default function LogoutPage() {
   const t = useTranslations("logout");

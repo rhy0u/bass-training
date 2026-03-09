@@ -20,7 +20,7 @@ import { toast } from "@friends/ui/toaster";
 import { Typography } from "@friends/ui/typography";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useState } from "react";
-import { createGroup, deleteGroup, type GroupResult } from "../actions/groups";
+import { createGroup, deleteGroup, type GroupResult } from "../../actions/groups";
 
 interface GroupSummary {
   id: string;

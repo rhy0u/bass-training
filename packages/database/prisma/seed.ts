@@ -1,5 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import { GroupRole, PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 
 const prisma = new PrismaClient();
 
@@ -62,14 +63,40 @@ async function main() {
         ownerId,
         members: {
           create: [
-            { userId: ownerId },
+            { userId: ownerId, role: GroupRole.ADMIN },
             ...memberEmails.map((email) => ({ userId: users[email]! })),
           ],
         },
       },
     });
+
+    // Create an active invitation from the owner
+    const invitation = await prisma.invitation.create({
+      data: {
+        groupId: group.id,
+        inviterId: ownerId,
+        token: crypto.randomUUID(),
+        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
+      },
+    });
+
+    // Create "joined" notifications for the owner (simulating members who joined via invite)
+    for (const email of memberEmails) {
+      const memberName = SEED_USERS.find((u) => u.email === email)?.name ?? email;
+      await prisma.notification.create({
+        data: {
+          userId: ownerId,
+          type: "group_join",
+          title: "New member",
+          message: `${memberName} joined ${group.name}`,
+          link: `/groups/${group.id}`,
+          read: false,
+        },
+      });
+    }
+
     console.log(
-      `Seeded group: ${group.name} (owner: ${ownerEmail}, members: ${memberEmails.length + 1})`,
+      `Seeded group: ${group.name} (owner: ${ownerEmail}, members: ${memberEmails.length + 1}, invitation: ${invitation.token.slice(0, 8)}…)`,
     );
   }
 }

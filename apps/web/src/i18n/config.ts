@@ -1,2 +1,2 @@
-export { defaultLocale, locales } from "./request";
-export type { Locale } from "./request";
+export { defaultLocale, locales } from "./routing";
+export type { Locale } from "./routing";

@@ -15,9 +15,11 @@
     "profile": "Profil",
     "logout": "Déconnexion",
     "groups": "Groupes",
+    "notifications": "Notifications",
     "userMenu": "Menu utilisateur",
     "lightMode": "Passer en mode clair",
-    "darkMode": "Passer en mode sombre"
+    "darkMode": "Passer en mode sombre",
+    "language": "Changer de langue"
   },
   "signIn": {
     "title": "Connexion",
@@ -87,7 +89,21 @@
     "saved": "Profil mis à jour avec succès.",
     "error": "Échec de la mise à jour",
     "deleteAccount": "Supprimer le compte",
-    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible."
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
+    "changePassword": "Changer le mot de passe",
+    "changePasswordDescription": "Mettez à jour le mot de passe de votre compte.",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmNewPassword": "Confirmer le nouveau mot de passe",
+    "confirmNewPasswordRequired": "Veuillez confirmer votre nouveau mot de passe.",
+    "passwordsMismatch": "Les mots de passe ne correspondent pas.",
+    "hintMinLength": "Au moins 8 caractères",
+    "hintUppercase": "Une lettre majuscule",
+    "hintLowercase": "Une lettre minuscule",
+    "hintNumber": "Un chiffre",
+    "hintSpecial": "Un caractère spécial",
+    "changePasswordSubmit": "Mettre à jour le mot de passe",
+    "passwordChanged": "Mot de passe mis à jour avec succès."
   },
   "groups": {
     "title": "Groupes",
@@ -134,6 +150,36 @@
     "memberRemoved": "Membre retiré.",
     "remove": "Retirer",
     "ownerBadge": "propriétaire",
-    "changeAvatar": "Changer l'avatar"
+    "adminBadge": "admin",
+    "changeAvatar": "Changer l'avatar",
+    "makeAdmin": "Nommer admin",
+    "removeAdmin": "Retirer admin",
+    "roleUpdated": "Rôle mis à jour.",
+    "createInvite": "Lien d'invitation",
+    "inviteLink": "Partagez ce lien pour inviter des personnes :",
+    "inviteCopied": "Lien d'invitation copié.",
+    "copy": "Copier"
+  },
+  "joinGroup": {
+    "title": "Rejoindre le groupe",
+    "description": "{inviter} vous invite à rejoindre {group}.",
+    "someone": "Quelqu'un",
+    "members": "{count, plural, =1 {1 membre} other {# membres}}",
+    "join": "Rejoindre le groupe",
+    "joining": "En cours…",
+    "joined": "Vous avez rejoint le groupe !",
+    "error": "Impossible de rejoindre",
+    "signInRequired": "Connectez-vous pour rejoindre ce groupe.",
+    "signIn": "Se connecter"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "description": "Restez informé de l'activité de vos groupes.",
+    "empty": "Aucune notification pour le moment.",
+    "markAllRead": "Tout marquer comme lu",
+    "justNow": "À l'instant",
+    "minutesAgo": "{count, plural, =1 {il y a 1 minute} other {il y a # minutes}}",
+    "hoursAgo": "{count, plural, =1 {il y a 1 heure} other {il y a # heures}}",
+    "daysAgo": "{count, plural, =1 {il y a 1 jour} other {il y a # jours}}"
   }
 }
