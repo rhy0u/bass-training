@@ -26,6 +26,7 @@ interface NavbarProps {
     profile: string;
     groups: string;
     logout: string;
+    userMenu: string;
     lightMode: string;
     darkMode: string;
   };
@@ -102,7 +103,7 @@ export function Navbar({ user, translations }: NavbarProps) {
           <ThemeToggle theme={theme} toggle={toggle} label={themeLabel} />
           {user ? (
             <>
-              <Link href="/profile">
+              <Link href="/profile" aria-label={translations.profile}>
                 <Avatar
                   src={user.avatar}
                   fallback={user.name ?? "?"}
@@ -147,7 +148,10 @@ export function Navbar({ user, translations }: NavbarProps) {
           <ThemeToggle theme={theme} toggle={toggle} label={themeLabel} />
           {user ? (
             <MenuRoot>
-              <MenuTrigger className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary">
+              <MenuTrigger
+                aria-label={translations.userMenu}
+                className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
                 <Avatar src={user.avatar} fallback={user.name ?? "?"} size="sm" />
               </MenuTrigger>
               <MenuPortal>

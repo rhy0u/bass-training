@@ -16,6 +16,7 @@ export async function NavbarServer() {
         profile: t("profile"),
         groups: t("groups"),
         logout: t("logout"),
+        userMenu: t("userMenu"),
         lightMode: t("lightMode"),
         darkMode: t("darkMode"),
       }}

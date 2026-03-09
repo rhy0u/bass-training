@@ -17,6 +17,7 @@ coverage/
 # Storybook
 build-storybook.log
 storybook-static/
+apps/web/public/storybook/
 
 # Misc
 .DS_Store
