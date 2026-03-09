@@ -18,6 +18,12 @@ export default defineConfig({
       include: ["src/**/index.tsx"],
       exclude: ["src/**/*.stories.tsx"],
       reporter: ["text", "html", "lcov"],
+      thresholds: {
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
+      },
     },
   },
 });

@@ -13,6 +13,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "db:generate": "dotenv -e ../../.env -- prisma generate",
     "db:push": "dotenv -e ../../.env -- prisma db push",
     "db:migrate": "dotenv -e ../../.env -- prisma migrate dev",
@@ -23,10 +25,12 @@
     "@prisma/client": "^6.4.0"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.0.18",
     "bcryptjs": "^3.0.3",
     "prisma": "^6.4.0",
     "tsx": "^4.19.0",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "vitest": "^4.0.18"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

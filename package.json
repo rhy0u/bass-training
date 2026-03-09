@@ -13,6 +13,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "test": "turbo run test",
+    "test:coverage": "turbo run test:coverage",
     "db:generate": "yarn workspace @friends/database db:generate",
     "db:push": "yarn workspace @friends/database db:push",
     "db:migrate": "yarn workspace @friends/database db:migrate",

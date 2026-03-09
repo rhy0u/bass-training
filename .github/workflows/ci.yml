@@ -94,11 +94,25 @@ jobs:
           key: deps-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
       - run: npx playwright install chromium --with-deps
       - run: yarn workspace @friends/ui test:coverage
+      - run: yarn workspace @friends/web test:coverage
+      - run: yarn workspace @friends/database test:coverage
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: coverage-report
+          name: coverage-ui
           path: packages/ui/coverage/
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-web
+          path: apps/web/coverage/
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-database
+          path: packages/database/coverage/
           retention-days: 14
 
   sonar:
@@ -111,8 +125,16 @@ jobs:
           fetch-depth: 0
       - uses: actions/download-artifact@v4
         with:
-          name: coverage-report
+          name: coverage-ui
           path: packages/ui/coverage/
+      - uses: actions/download-artifact@v4
+        with:
+          name: coverage-web
+          path: apps/web/coverage/
+      - uses: actions/download-artifact@v4
+        with:
+          name: coverage-database
+          path: packages/database/coverage/
       - uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
