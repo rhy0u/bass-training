@@ -15,6 +15,7 @@ interface NavbarProps {
     signIn: string;
     signUp: string;
     profile: string;
+    groups: string;
     logout: string;
     lightMode: string;
     darkMode: string;
@@ -83,6 +84,12 @@ export function Navbar({ user, translations }: NavbarProps) {
                   size="sm"
                   className="cursor-pointer"
                 />
+              </Link>
+              <Link
+                href="/groups"
+                className="text-sm text-foreground-secondary hover:text-foreground"
+              >
+                {translations.groups}
               </Link>
               <Link
                 href="/profile"
