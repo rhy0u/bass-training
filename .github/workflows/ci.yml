@@ -21,6 +21,7 @@ jobs:
           node-version: 20
           cache: yarn
       - run: yarn install --frozen-lockfile
+      - run: yarn workspace @friends/database db:generate
       - run: yarn lint
       - run: yarn format:check
 
@@ -35,6 +36,7 @@ jobs:
           node-version: 20
           cache: yarn
       - run: yarn install --frozen-lockfile
+      - run: yarn workspace @friends/database db:generate
       - run: yarn build
 
   test:
