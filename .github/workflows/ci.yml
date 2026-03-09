@@ -37,6 +37,7 @@ jobs:
           cache: yarn
       - run: yarn install --frozen-lockfile
       - run: yarn workspace @friends/database db:generate
+      - run: yarn workspace @friends/database build
       - run: yarn build
 
   test:
@@ -71,7 +72,7 @@ jobs:
         with:
           name: coverage-report
           path: packages/ui/coverage/
-      - uses: SonarSource/sonarqube-scan-action@v5
+      - uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
