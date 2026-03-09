@@ -17,7 +17,9 @@ interface NotificationItem {
   createdAt: string;
 }
 
-export function NotificationsPageClient({ notifications }: { notifications: NotificationItem[] }) {
+export function NotificationsPageClient({
+  notifications,
+}: Readonly<{ notifications: NotificationItem[] }>) {
   const t = useTranslations("notifications");
   const router = useRouter();
   const hasUnread = notifications.some((n) => !n.read);

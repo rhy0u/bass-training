@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useSyncExternalStore } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useSyncExternalStore,
+} from "react";
 
 type Theme = "light" | "dark";
 
@@ -35,7 +42,7 @@ function getServerSnapshot(): Theme {
   return "light";
 }
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function ThemeProvider({ children }: Readonly<{ children: React.ReactNode }>) {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   useEffect(() => {
@@ -49,5 +56,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     emitChange();
   }, []);
 
-  return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
+  const value = useMemo(() => ({ theme, toggle }), [theme, toggle]);
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }

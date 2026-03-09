@@ -37,7 +37,7 @@ interface NavbarProps {
   };
 }
 
-function NotificationBell({ count, label }: { count: number; label: string }) {
+function NotificationBell({ count, label }: Readonly<{ count: number; label: string }>) {
   return (
     <Link
       href="/notifications"
@@ -71,11 +71,11 @@ function ThemeToggle({
   theme,
   toggle,
   label,
-}: {
+}: Readonly<{
   theme: string;
   toggle: () => void;
   label: string;
-}) {
+}>) {
   return (
     <button
       onClick={toggle}
@@ -127,7 +127,7 @@ export function Navbar({
   unreadNotificationCount = 0,
   currentLocale,
   translations,
-}: NavbarProps) {
+}: Readonly<NavbarProps>) {
   const { theme, toggle } = useTheme();
   const themeLabel = theme === "dark" ? translations.lightMode : translations.darkMode;
 

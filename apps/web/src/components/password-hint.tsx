@@ -18,20 +18,28 @@ interface PasswordHintProps {
   };
 }
 
+function buildPasswordRules(
+  password: string,
+  submitted: boolean,
+  translations: PasswordHintProps["translations"],
+): FieldRule[] {
+  if (!submitted && !password) return [];
+  return [
+    { label: translations.hintMinLength, valid: password.length >= 8 },
+    { label: translations.hintUppercase, valid: /[A-Z]/.test(password) },
+    { label: translations.hintLowercase, valid: /[a-z]/.test(password) },
+    { label: translations.hintNumber, valid: /\d/.test(password) },
+    { label: translations.hintSpecial, valid: /[^a-zA-Z0-9]/.test(password) },
+  ];
+}
+
 export function usePasswordRules(translations: PasswordHintProps["translations"]) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   function passwordRules(): FieldRule[] {
-    if (!submitted && !password) return [];
-    return [
-      { label: translations.hintMinLength, valid: password.length >= 8 },
-      { label: translations.hintUppercase, valid: /[A-Z]/.test(password) },
-      { label: translations.hintLowercase, valid: /[a-z]/.test(password) },
-      { label: translations.hintNumber, valid: /\d/.test(password) },
-      { label: translations.hintSpecial, valid: /[^a-zA-Z0-9]/.test(password) },
-    ];
+    return buildPasswordRules(password, submitted, translations);
   }
 
   function confirmPasswordRules(): FieldRule[] {
@@ -68,17 +76,6 @@ export function PasswordRulesDisplay({
   password,
   submitted,
   translations,
-}: Omit<PasswordHintProps, "confirmPassword">) {
-  function rules(): FieldRule[] {
-    if (!submitted && !password) return [];
-    return [
-      { label: translations.hintMinLength, valid: password.length >= 8 },
-      { label: translations.hintUppercase, valid: /[A-Z]/.test(password) },
-      { label: translations.hintLowercase, valid: /[a-z]/.test(password) },
-      { label: translations.hintNumber, valid: /\d/.test(password) },
-      { label: translations.hintSpecial, valid: /[^a-zA-Z0-9]/.test(password) },
-    ];
-  }
-
-  return <FieldError rules={rules()} />;
+}: Readonly<Omit<PasswordHintProps, "confirmPassword">>) {
+  return <FieldError rules={buildPasswordRules(password, submitted, translations)} />;
 }

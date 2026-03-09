@@ -32,7 +32,7 @@ interface GroupSummary {
   isOwner: boolean;
 }
 
-export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
+export function GroupsPageClient({ groups }: Readonly<{ groups: GroupSummary[] }>) {
   const t = useTranslations("groups");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);

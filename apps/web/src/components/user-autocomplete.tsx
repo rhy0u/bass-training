@@ -19,7 +19,11 @@ interface UserAutocompleteProps {
   placeholder?: string;
 }
 
-export function UserAutocomplete({ excludeGroupId, onSelect, placeholder }: UserAutocompleteProps) {
+export function UserAutocomplete({
+  excludeGroupId,
+  onSelect,
+  placeholder,
+}: Readonly<UserAutocompleteProps>) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<UserResult[]>([]);
   const [open, setOpen] = useState(false);

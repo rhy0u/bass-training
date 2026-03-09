@@ -51,7 +51,7 @@ interface GroupDetail {
   currentUserId: string;
 }
 
-export function GroupDetailClient({ group }: { group: GroupDetail }) {
+export function GroupDetailClient({ group }: Readonly<{ group: GroupDetail }>) {
   const t = useTranslations("groupDetail");
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -107,7 +107,7 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
     if (result.error) {
       toast(t("error"), { description: result.error, type: "error" });
     } else if (result.token) {
-      const link = `${window.location.origin}/groups/join/${result.token}`;
+      const link = `${globalThis.location.origin}/groups/join/${result.token}`;
       setInviteLink(link);
       await navigator.clipboard.writeText(link);
       toast(t("inviteCopied"), { type: "success" });
@@ -116,7 +116,7 @@ export function GroupDetailClient({ group }: { group: GroupDetail }) {
 
   const handleRoleToggle = async (memberId: string, currentRole: string) => {
     const newRole = currentRole === "ADMIN" ? "MEMBER" : "ADMIN";
-    const result = await updateMemberRole(group.id, memberId, newRole as "ADMIN" | "MEMBER");
+    const result = await updateMemberRole(group.id, memberId, newRole);
     if (result.error) {
       toast(t("error"), { description: result.error, type: "error" });
     } else {

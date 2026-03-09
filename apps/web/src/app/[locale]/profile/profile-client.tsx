@@ -34,7 +34,7 @@ interface ProfilePageClientProps {
   };
 }
 
-export function ProfilePageClient({ user }: ProfilePageClientProps) {
+export function ProfilePageClient({ user }: Readonly<ProfilePageClientProps>) {
   const t = useTranslations("profile");
   const [avatarPreview, setAvatarPreview] = useState<string | null>(user.avatar);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -122,7 +122,7 @@ export function ProfilePageClient({ user }: ProfilePageClientProps) {
   };
 
   const handleDeleteAccount = async () => {
-    if (window.confirm(t("deleteConfirm"))) {
+    if (globalThis.confirm(t("deleteConfirm"))) {
       await deleteAccount();
     }
   };
