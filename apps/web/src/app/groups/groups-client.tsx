@@ -63,9 +63,7 @@ export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
         </div>
 
         <DialogRoot open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogTrigger>
-            <Button size="sm">{t("create")}</Button>
-          </DialogTrigger>
+          <DialogTrigger render={<Button size="sm" />}>{t("create")}</DialogTrigger>
           <DialogPortal>
             <DialogBackdrop />
             <DialogPopup>
@@ -88,10 +86,8 @@ export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
                   />
                 </div>
                 <div className="flex justify-end gap-2">
-                  <DialogClose>
-                    <Button variant="ghost" type="button">
-                      {t("cancel")}
-                    </Button>
+                  <DialogClose render={<Button variant="ghost" type="button" />}>
+                    {t("cancel")}
                   </DialogClose>
                   <Button type="submit" disabled={createPending}>
                     {createPending ? t("creating") : t("create")}
@@ -125,10 +121,11 @@ export function GroupsPageClient({ groups }: { groups: GroupSummary[] }) {
                   </CardDescription>
                 </div>
                 <div className="flex gap-2">
-                  <Link href={`/groups/${group.id}`}>
-                    <Button variant="outline" size="sm">
-                      {t("view")}
-                    </Button>
+                  <Link
+                    href={`/groups/${group.id}`}
+                    className="inline-flex h-8 items-center justify-center rounded-md border border-border px-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-secondary"
+                  >
+                    {t("view")}
                   </Link>
                   {group.isOwner && (
                     <Button

@@ -1,9 +1,9 @@
 "use client";
 
+import { searchUsers } from "@/app/actions/groups";
 import { Avatar } from "@friends/ui/avatar";
 import { Input } from "@friends/ui/input";
 import { useEffect, useRef, useState, useTransition } from "react";
-import { searchUsers } from "@/app/actions/groups";
 
 interface UserResult {
   id: string;
