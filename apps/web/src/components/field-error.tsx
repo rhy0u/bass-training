@@ -1,6 +1,5 @@
 import { Typography } from "@friends/ui/typography";
-import { CheckCircleIcon } from "./icons/check-circle";
-import { XCircleIcon } from "./icons/x-circle";
+import Image from "next/image";
 
 export interface FieldRule {
   label: string;
@@ -13,11 +12,13 @@ export function FieldError({ rules }: { rules: FieldRule[] }) {
     <ul className="mt-1.5 space-y-0.5">
       {rules.map(({ label, valid }) => (
         <li key={label} className="flex items-center gap-1.5">
-          {valid ? (
-            <CheckCircleIcon className="shrink-0 text-green-500" />
-          ) : (
-            <XCircleIcon className="shrink-0 text-red-500" />
-          )}
+          <Image
+            src={valid ? "/icons/check-circle.svg" : "/icons/x-circle.svg"}
+            alt=""
+            width={14}
+            height={14}
+            className="shrink-0"
+          />
           <Typography variant="caption" className={valid ? "text-green-500" : "text-red-500"}>
             {label}
           </Typography>
