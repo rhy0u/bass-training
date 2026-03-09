@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
 import { defaultLocale, locales, routing } from "@/i18n/routing";
+import { describe, expect, it } from "vitest";
 
 describe("routing", () => {
   it("exports locales", () => {

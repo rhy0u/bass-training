@@ -13,8 +13,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "turbo run test",
-    "test:coverage": "turbo run test:coverage",
+    "test": "turbo run test --log-order=grouped",
+    "test:coverage": "turbo run test:coverage --log-order=grouped",
     "db:generate": "yarn workspace @friends/database db:generate",
     "db:push": "yarn workspace @friends/database db:push",
     "db:migrate": "yarn workspace @friends/database db:migrate",
@@ -39,6 +39,7 @@
     "turbo": "^2.4.0",
     "typescript-eslint": "^8.56.1"
   },
+  "packageManager": "yarn@1.22.22",
   "engines": {
     "node": ">=18.0.0"
   },
