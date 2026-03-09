@@ -47,6 +47,7 @@
     "passwordPlaceholder": "••••••••",
     "passwordRequired": "Le mot de passe est requis.",
     "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères.",
+    "passwordHint": "Au moins 8 caractères, avec majuscule, minuscule, chiffre et caractère spécial.",
     "confirmPassword": "Confirmer le mot de passe",
     "confirmPasswordPlaceholder": "••••••••",
     "confirmPasswordRequired": "Veuillez confirmer votre mot de passe.",

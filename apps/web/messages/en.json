@@ -47,6 +47,7 @@
     "passwordPlaceholder": "••••••••",
     "passwordRequired": "Password is required.",
     "passwordMinLength": "Password must be at least 8 characters.",
+    "passwordHint": "At least 8 characters, with uppercase, lowercase, number, and special character.",
     "confirmPassword": "Confirm password",
     "confirmPasswordPlaceholder": "••••••••",
     "confirmPasswordRequired": "Please confirm your password.",

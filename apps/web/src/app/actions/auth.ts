@@ -45,8 +45,14 @@ export async function signUp(_prev: AuthResult | null, formData: FormData): Prom
     return { error: "Passwords do not match" };
   }
 
-  if (password.length < 8) {
-    return { error: "Password must be at least 8 characters" };
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(email)) {
+    return { error: "Invalid email address" };
+  }
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/;
+  if (!passwordRegex.test(password)) {
+    return { error: "Password must be at least 8 characters with uppercase, lowercase, number, and special character" };
   }
 
   const existing = await db.user.findUnique({ where: { email } });

@@ -3,22 +3,23 @@ import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-// ┌──────────────────────────────────────────────────────────┐
-// │  Seed users – passwords listed below for dev/testing     │
-// │                                                          │
-// │  alice@friends.local   →  password: "alice123"           │
-// │  bob@friends.local     →  password: "bob12345"           │
-// │  charlie@friends.local →  password: "charlie1"           │
-// │  diana@friends.local   →  password: "diana123"           │
-// │  eric@friends.local    →  password: "eric1234"           │
-// └──────────────────────────────────────────────────────────┘
+// ┌──────────────────────────────────────────────────────────────┐
+// │  Seed users – passwords listed below for dev/testing         │
+// │  (min 8 chars, uppercase, lowercase, digit, special char)    │
+// │                                                              │
+// │  alice@friends.local   →  password: "Alice123!"              │
+// │  bob@friends.local     →  password: "Bob12345!"              │
+// │  charlie@friends.local →  password: "Charlie1!"              │
+// │  diana@friends.local   →  password: "Diana123!"              │
+// │  eric@friends.local    →  password: "Eric1234!"              │
+// └──────────────────────────────────────────────────────────────┘
 
 const SEED_USERS = [
-  { email: "alice@friends.local", name: "Alice Martin", password: "alice123" },
-  { email: "bob@friends.local", name: "Bob Dupont", password: "bob12345" },
-  { email: "charlie@friends.local", name: "Charlie Leroy", password: "charlie1" },
-  { email: "diana@friends.local", name: "Diana Moreau", password: "diana123" },
-  { email: "eric@friends.local", name: "Eric Bernard", password: "eric1234" },
+  { email: "alice@friends.local", name: "Alice Martin", password: "Alice123!" },
+  { email: "bob@friends.local", name: "Bob Dupont", password: "Bob12345!" },
+  { email: "charlie@friends.local", name: "Charlie Leroy", password: "Charlie1!" },
+  { email: "diana@friends.local", name: "Diana Moreau", password: "Diana123!" },
+  { email: "eric@friends.local", name: "Eric Bernard", password: "Eric1234!" },
 ];
 
 const SEED_GROUPS = [

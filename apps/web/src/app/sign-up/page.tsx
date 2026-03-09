@@ -56,6 +56,8 @@ export default function SignUpPage() {
                 name="email"
                 type="email"
                 placeholder={t("emailPlaceholder")}
+                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                title={t("emailRequired")}
                 required
               />
             </div>
@@ -70,7 +72,10 @@ export default function SignUpPage() {
                 placeholder={t("passwordPlaceholder")}
                 required
                 minLength={8}
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}"
+                title={t("passwordHint")}
               />
+              <p className="mt-1 text-xs text-foreground-secondary">{t("passwordHint")}</p>
             </div>
             <div>
               <label
