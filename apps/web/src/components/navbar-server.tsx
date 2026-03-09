@@ -15,6 +15,8 @@ export async function NavbarServer() {
         signUp: t("signUp"),
         profile: t("profile"),
         logout: t("logout"),
+        lightMode: t("lightMode"),
+        darkMode: t("darkMode"),
       }}
     />
   );

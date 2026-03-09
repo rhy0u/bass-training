@@ -13,7 +13,9 @@
     "signIn": "Connexion",
     "signUp": "Inscription",
     "profile": "Profil",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "lightMode": "Passer en mode clair",
+    "darkMode": "Passer en mode sombre"
   },
   "signIn": {
     "title": "Connexion",

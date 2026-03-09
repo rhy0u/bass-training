@@ -13,7 +13,9 @@
     "signIn": "Sign in",
     "signUp": "Sign up",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "lightMode": "Switch to light mode",
+    "darkMode": "Switch to dark mode"
   },
   "signIn": {
     "title": "Sign in",

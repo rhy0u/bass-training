@@ -1,4 +1,5 @@
 import { NavbarServer } from "@/components/navbar-server";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@friends/ui/toaster";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
@@ -15,12 +16,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body>
         <NextIntlClientProvider messages={messages}>
-          <NavbarServer />
-          {children}
-          <Toaster />
+          <ThemeProvider>
+            <NavbarServer />
+            {children}
+            <Toaster />
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>
