@@ -6,24 +6,41 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=apps/web",
-    "build": "npm run build --workspace=apps/web",
-    "start": "npm run start --workspace=apps/web",
-    "lint": "npm run lint --workspace=apps/web",
-    "db:generate": "npm run db:generate --workspace=packages/database",
-    "db:push": "npm run db:push --workspace=packages/database",
-    "db:migrate": "npm run db:migrate --workspace=packages/database",
-    "db:studio": "npm run db:studio --workspace=packages/database",
-    "db:seed": "npm run db:seed --workspace=packages/database",
+    "dev": "yarn workspace @friends/web dev",
+    "build": "yarn workspace @friends/web build",
+    "start": "yarn workspace @friends/web start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:generate": "yarn workspace @friends/database db:generate",
+    "db:push": "yarn workspace @friends/database db:push",
+    "db:migrate": "yarn workspace @friends/database db:migrate",
+    "db:studio": "yarn workspace @friends/database db:studio",
+    "db:seed": "yarn workspace @friends/database db:seed",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
-    "docker:build": "docker compose build"
+    "docker:build": "docker compose build",
+    "storybook": "yarn workspace @friends/ui storybook"
   },
   "devDependencies": {
-    "turbo": "^2.4.0"
+    "@eslint/js": "^10.0.1",
+    "@next/eslint-plugin-next": "^16.1.6",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^16.1.6",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "prettier": "^3.8.1",
+    "turbo": "^2.4.0",
+    "typescript-eslint": "^8.56.1"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "dotenv-cli": "^11.0.0"
   }
 }

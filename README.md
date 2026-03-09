@@ -47,41 +47,41 @@ Or manually:
 
 ```bash
 # 1. Install dependencies
-npm install
+yarn install
 
 # 2. Start Docker services
 docker compose up -d
 
 # 3. Generate Prisma client & push schema
-npm run db:generate
-npm run db:push
+yarn db:generate
+yarn db:push
 
 # 4. Seed the database
-npm run db:seed
+yarn db:seed
 
 # 5. Add custom domain to hosts file
 sudo sh -c 'echo "127.0.0.1  friends.local" >> /etc/hosts'
 
 # 6. Start development
-npm run dev
+yarn dev
 ```
 
 Visit **http://friends.local** in your browser.
 
 ## Commands
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start Next.js dev server |
-| `npm run build` | Build for production |
-| `npm run docker:up` | Start Postgres + Redis + Nginx |
-| `npm run docker:down` | Stop Docker services |
-| `npm run docker:logs` | View Docker container logs |
-| `npm run db:generate` | Generate Prisma client |
-| `npm run db:push` | Push schema to database |
-| `npm run db:migrate` | Create & run migrations |
-| `npm run db:studio` | Open Prisma Studio GUI |
-| `npm run db:seed` | Seed the database |
+| Command            | Description                    |
+| ------------------ | ------------------------------ |
+| `yarn dev`         | Start Next.js dev server       |
+| `yarn build`       | Build for production           |
+| `yarn docker:up`   | Start Postgres + Redis + Nginx |
+| `yarn docker:down` | Stop Docker services           |
+| `yarn docker:logs` | View Docker container logs     |
+| `yarn db:generate` | Generate Prisma client         |
+| `yarn db:push`     | Push schema to database        |
+| `yarn db:migrate`  | Create & run migrations        |
+| `yarn db:studio`   | Open Prisma Studio GUI         |
+| `yarn db:seed`     | Seed the database              |
 
 ## Custom Domain
 

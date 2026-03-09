@@ -1,0 +1,80 @@
+{
+  "home": {
+    "title": "Friends",
+    "welcome": "Bienvenue sur le projet Friends.",
+    "usersCount": "Utilisateurs en base : {count}"
+  },
+  "metadata": {
+    "title": "Friends",
+    "description": "Projet Friends"
+  },
+  "navbar": {
+    "brand": "Friends",
+    "signIn": "Connexion",
+    "signUp": "Inscription",
+    "profile": "Profil",
+    "logout": "Déconnexion"
+  },
+  "signIn": {
+    "title": "Connexion",
+    "description": "Entrez vos identifiants pour accéder à votre compte.",
+    "email": "E-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "emailRequired": "L'e-mail est requis.",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Le mot de passe est requis.",
+    "submit": "Se connecter",
+    "submitting": "Connexion…",
+    "error": "Échec de la connexion",
+    "noAccount": "Pas encore de compte ?",
+    "signUpLink": "S'inscrire"
+  },
+  "signUp": {
+    "title": "Créer un compte",
+    "description": "Remplissez les champs ci-dessous pour commencer.",
+    "name": "Nom",
+    "namePlaceholder": "Jean Dupont",
+    "nameRequired": "Le nom est requis.",
+    "email": "E-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "emailRequired": "L'e-mail est requis.",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Le mot de passe est requis.",
+    "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères.",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "••••••••",
+    "confirmPasswordRequired": "Veuillez confirmer votre mot de passe.",
+    "passwordsMismatch": "Les mots de passe ne correspondent pas.",
+    "submit": "S'inscrire",
+    "submitting": "Création du compte…",
+    "error": "Échec de l'inscription",
+    "hasAccount": "Déjà un compte ?",
+    "signInLink": "Se connecter"
+  },
+  "logout": {
+    "title": "Déconnexion",
+    "description": "Voulez-vous vraiment vous déconnecter ?",
+    "confirm": "Se déconnecter",
+    "cancel": "Annuler"
+  },
+  "profile": {
+    "title": "Profil",
+    "description": "Gérez les paramètres de votre compte.",
+    "changeAvatar": "Changer l'avatar",
+    "avatarHint": "JPG, PNG ou GIF. 2 Mo max.",
+    "name": "Nom",
+    "namePlaceholder": "Jean Dupont",
+    "nameRequired": "Le nom est requis.",
+    "email": "E-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "emailRequired": "L'e-mail est requis.",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "saved": "Profil mis à jour avec succès.",
+    "error": "Échec de la mise à jour",
+    "deleteAccount": "Supprimer le compte",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible."
+  }
+}

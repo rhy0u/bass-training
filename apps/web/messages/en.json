@@ -1,0 +1,80 @@
+{
+  "home": {
+    "title": "Friends",
+    "welcome": "Welcome to the Friends project.",
+    "usersCount": "Users in database: {count}"
+  },
+  "metadata": {
+    "title": "Friends",
+    "description": "Friends project"
+  },
+  "navbar": {
+    "brand": "Friends",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "signIn": {
+    "title": "Sign in",
+    "description": "Enter your credentials to access your account.",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "emailRequired": "Email is required.",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Password is required.",
+    "submit": "Sign in",
+    "submitting": "Signing in…",
+    "error": "Sign-in failed",
+    "noAccount": "Don't have an account?",
+    "signUpLink": "Sign up"
+  },
+  "signUp": {
+    "title": "Create an account",
+    "description": "Fill in the fields below to get started.",
+    "name": "Name",
+    "namePlaceholder": "Jane Doe",
+    "nameRequired": "Name is required.",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "emailRequired": "Email is required.",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Password is required.",
+    "passwordMinLength": "Password must be at least 8 characters.",
+    "confirmPassword": "Confirm password",
+    "confirmPasswordPlaceholder": "••••••••",
+    "confirmPasswordRequired": "Please confirm your password.",
+    "passwordsMismatch": "Passwords do not match.",
+    "submit": "Sign up",
+    "submitting": "Creating account…",
+    "error": "Sign-up failed",
+    "hasAccount": "Already have an account?",
+    "signInLink": "Sign in"
+  },
+  "logout": {
+    "title": "Log out",
+    "description": "Are you sure you want to log out?",
+    "confirm": "Log out",
+    "cancel": "Cancel"
+  },
+  "profile": {
+    "title": "Profile",
+    "description": "Manage your account settings.",
+    "changeAvatar": "Change avatar",
+    "avatarHint": "JPG, PNG or GIF. Max 2 MB.",
+    "name": "Name",
+    "namePlaceholder": "Jane Doe",
+    "nameRequired": "Name is required.",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "emailRequired": "Email is required.",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "saved": "Profile updated successfully.",
+    "error": "Update failed",
+    "deleteAccount": "Delete account",
+    "deleteConfirm": "Are you sure you want to delete your account? This action cannot be undone."
+  }
+}

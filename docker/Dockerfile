@@ -4,11 +4,11 @@ FROM node:20-alpine AS base
 FROM base AS deps
 WORKDIR /app
 
-COPY package.json ./
+COPY package.json yarn.lock ./
 COPY apps/web/package.json ./apps/web/
 COPY packages/database/package.json ./packages/database/
 
-RUN npm install
+RUN yarn install --frozen-lockfile
 
 # ── Prisma Generate ──────────────────────────────────────
 FROM base AS prisma
@@ -27,8 +27,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=prisma /app/node_modules/.prisma ./node_modules/.prisma
 COPY . .
 
-RUN npm run build --workspace=packages/database
-RUN npm run build --workspace=apps/web
+RUN yarn workspace @friends/database build
+RUN yarn workspace @friends/web build
 
 # ── Production ────────────────────────────────────────────
 FROM base AS runner

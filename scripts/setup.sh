@@ -13,7 +13,7 @@ fi
 
 # 2. Install dependencies
 echo "📦 Installing dependencies..."
-npm install
+yarn install
 
 # 3. Start Docker services
 echo "🐳 Starting Docker services (Postgres, Redis, Nginx)..."
@@ -28,14 +28,14 @@ echo "✅ PostgreSQL is ready"
 
 # 5. Generate Prisma client & push schema
 echo "🔧 Generating Prisma client..."
-npm run db:generate
+yarn db:generate
 
 echo "📐 Pushing database schema..."
-npm run db:push
+yarn db:push
 
 # 6. Seed the database
 echo "🌱 Seeding database..."
-npm run db:seed
+yarn db:seed
 
 # 7. Add hosts entry reminder
 echo ""
@@ -46,4 +46,4 @@ echo ""
 echo "   sudo sh -c 'echo \"127.0.0.1  friends.local\" >> /etc/hosts'"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-echo "✅ Setup complete! Run 'npm run dev' and visit http://friends.local"
+echo "✅ Setup complete! Run 'yarn dev' and visit http://friends.local"
