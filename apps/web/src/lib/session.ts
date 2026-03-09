@@ -19,7 +19,7 @@ export async function createSession(userId: string) {
     .setIssuedAt()
     .sign(SECRET);
 
-  await redis.set(`session:${token}`, userId, "EX", SESSION_TTL);
+  await redis.set(`session:${token}`, userId, { ex: SESSION_TTL });
 
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, token, {
