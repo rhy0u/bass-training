@@ -1,5 +1,7 @@
 "use client";
 
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { locales, type Locale } from "@/i18n/routing";
 import {
   MenuItem,
   MenuPopup,
@@ -8,8 +10,6 @@ import {
   MenuRoot,
   MenuTrigger,
 } from "@friends/ui/menu";
-import { usePathname, useRouter } from "@/i18n/navigation";
-import { locales, type Locale } from "@/i18n/routing";
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import { useTransition } from "react";
