@@ -7,11 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum GroupRole {
-  ADMIN
-  MEMBER
-}
-
 model User {
   id           String   @id @default(cuid())
   email        String   @unique
@@ -21,68 +16,5 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  ownedGroups    Group[]        @relation("GroupOwner")
-  memberships    GroupMember[]
-  invitations    Invitation[]   @relation("InvitationInviter")
-  notifications  Notification[]
-
   @@map("users")
-}
-
-model Group {
-  id        String   @id @default(cuid())
-  name      String
-  avatar    String?
-  ownerId   String   @map("owner_id")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  owner       User          @relation("GroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
-  members     GroupMember[]
-  invitations Invitation[]
-
-  @@map("groups")
-}
-
-model GroupMember {
-  id       String    @id @default(cuid())
-  groupId  String    @map("group_id")
-  userId   String    @map("user_id")
-  role     GroupRole @default(MEMBER)
-  joinedAt DateTime  @default(now())
-
-  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([groupId, userId])
-  @@map("group_members")
-}
-
-model Invitation {
-  id        String   @id @default(cuid())
-  groupId   String   @map("group_id")
-  inviterId String   @map("inviter_id")
-  token     String   @unique @default(uuid())
-  expiresAt DateTime @map("expires_at")
-  createdAt DateTime @default(now())
-
-  group   Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  inviter User  @relation("InvitationInviter", fields: [inviterId], references: [id], onDelete: Cascade)
-
-  @@map("invitations")
-}
-
-model Notification {
-  id        String   @id @default(cuid())
-  userId    String   @map("user_id")
-  type      String
-  title     String
-  message   String
-  link      String?
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("notifications")
 }

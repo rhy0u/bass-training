@@ -1,16 +1,16 @@
 ---
-name: friends-conventions
-description: Coding conventions for the Friends monorepo. Use Typography from @friends/ui instead of raw HTML tags (p, h1, h2, etc.). Extract reusable form components (FieldError, PasswordHint) into apps/web/src/components/. Use next-intl for all user-facing strings. Follow mobile-first responsive patterns with the xs/sm/md/lg/xl breakpoints from the Tailwind preset.
+name: boilerplate-conventions
+description: Coding conventions for the Boilerplate monorepo. Use Typography from @boilerplate/ui instead of raw HTML tags (p, h1, h2, etc.). Extract reusable form components (FieldError, PasswordHint) into apps/web/src/components/. Use next-intl for all user-facing strings. Follow mobile-first responsive patterns with the xs/sm/md/lg/xl breakpoints from the Tailwind preset.
 ---
 
-# Friends Project Conventions
+# Boilerplate Project Conventions
 
 ## Typography
 
-Always use the `Typography` component from `@friends/ui/typography` instead of raw HTML elements (`<p>`, `<h1>`, `<span>`, etc.).
+Always use the `Typography` component from `@boilerplate/ui/typography` instead of raw HTML elements (`<p>`, `<h1>`, `<span>`, etc.).
 
 ```tsx
-import { Typography } from "@friends/ui/typography";
+import { Typography } from "@boilerplate/ui/typography";
 
 // ✅ Correct
 <Typography variant="body-sm" className="text-red-500">Error message</Typography>
@@ -40,7 +40,7 @@ const t = useTranslations("signUp");
 
 ## UI Components
 
-All shared UI primitives are in `packages/ui/src/` (buttons, cards, inputs, dialogs, etc.) and exported as `@friends/ui/<component>`.
+All shared UI primitives are in `packages/ui/src/` (buttons, cards, inputs, dialogs, etc.) and exported as `@boilerplate/ui/<component>`.
 
 ## Validation
 

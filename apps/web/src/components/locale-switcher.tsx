@@ -9,7 +9,7 @@ import {
   MenuPositioner,
   MenuRoot,
   MenuTrigger,
-} from "@friends/ui/menu";
+} from "@boilerplate/ui/menu";
 import { useLocale } from "next-intl";
 import Image from "next/image";
 import { useTransition } from "react";

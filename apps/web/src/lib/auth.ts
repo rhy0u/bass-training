@@ -1,4 +1,4 @@
-import { db } from "@friends/database";
+import { db } from "@boilerplate/database";
 import { getSession } from "./session";
 
 export async function getCurrentUser() {

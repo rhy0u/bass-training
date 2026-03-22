@@ -1,5 +1,5 @@
 {
-  "name": "@friends/web",
+  "name": "@boilerplate/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@friends/database": "*",
-    "@friends/ui": "*",
+    "@boilerplate/database": "*",
+    "@boilerplate/ui": "*",
     "@tailwindcss/postcss": "^4.2.1",
     "@upstash/redis": "^1.36.4",
     "bcryptjs": "^3.0.3",

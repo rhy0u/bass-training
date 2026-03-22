@@ -1,103 +1,147 @@
-# Friends
+# Boilerplate
 
-A monorepo project built with **Next.js**, **Prisma**, **PostgreSQL**, **Redis**, and **Nginx** reverse proxy.
+A full-stack monorepo boilerplate with **Next.js**, **Prisma**, **PostgreSQL**, **Redis**, **Nginx**, and built-in auth — ready to rename and ship.
+
+## Features
+
+- **Authentication** — Sign-up, sign-in, session management (Redis), profile & password update
+- **i18n** — 5 languages (EN, FR, DE, ES, PT) via `next-intl`
+- **UI package** — Shared component library (`@boilerplate/ui`) with Storybook & Chromatic
+- **Dark mode** — Flash-free theme toggle persisted in `localStorage`
+- **Database** — Prisma + PostgreSQL with a pre-wired singleton client
+- **Reverse proxy** — Nginx with custom local domain and HTTPS via `mkcert`
+- **Testing** — Vitest + Testing Library with coverage reports
+- **CI** — GitHub Actions pipeline (lint, test, build)
 
 ## Architecture
 
 ```
-friends/
+boilerplate/
 ├── apps/
-│   └── web/                 # Next.js application
-│       └── src/
-│           ├── app/         # App Router pages
-│           └── lib/         # Shared utilities (redis, etc.)
+│   └── web/                    # Next.js 15 application (App Router)
+│       ├── src/
+│       │   ├── app/            # Routes, layouts, server actions
+│       │   ├── components/     # Shared UI (Navbar, LocaleSwitcher, …)
+│       │   ├── i18n/           # next-intl routing & config
+│       │   └── lib/            # Auth, Redis session helpers
+│       └── messages/           # Translation files (en/fr/de/es/pt)
 ├── packages/
-│   └── database/            # Prisma client & schema
-│       ├── prisma/
-│       │   ├── schema.prisma
-│       │   └── seed.ts
-│       └── src/
-│           └── index.ts     # Prisma client singleton
+│   ├── database/               # Prisma client & schema
+│   │   ├── prisma/
+│   │   │   ├── schema.prisma   # User model (extend here)
+│   │   │   └── seed.ts
+│   │   └── src/index.ts        # Prisma singleton
+│   └── ui/                     # Shared component library
+│       └── src/                # Button, Input, Dialog, Menu, …
 ├── docker/
-│   └── nginx/               # Nginx reverse proxy config
+│   └── nginx/                  # Reverse proxy
 │       ├── nginx.conf
 │       └── conf.d/
-│           └── friends.conf # Custom domain → Next.js
-├── docker-compose.yml       # Postgres + Redis + Nginx
-├── turbo.json               # Turborepo config
-└── package.json             # Workspace root
+│           └── boilerplate.conf
+├── scripts/
+│   ├── init.sh                 # 🔑 Rename boilerplate → your project
+│   └── setup.sh                # First-run setup (deps, Docker, DB, certs)
+├── docker-compose.yml          # Postgres + Redis + Nginx
+├── turbo.json                  # Turborepo pipeline
+└── package.json                # Workspace root
 ```
 
-## Quick Start
+## Getting Started
 
-### Prerequisites
-
-- Node.js ≥ 18
-- Docker & Docker Compose
-
-### Setup
+### 1. Rename the project
 
 ```bash
-# Make setup script executable and run it
-chmod +x scripts/setup.sh
-./scripts/setup.sh
+# Replaces every "boilerplate" reference with your project name
+yarn init-project my-app
+# or with spaces (auto-converts to slug + PascalCase)
+yarn init-project "My App"
 ```
 
-Or manually:
+This renames package names, Docker container names, Nginx config, translation strings, and every other reference throughout the codebase.
+
+### 2. Run setup
 
 ```bash
-# 1. Install dependencies
-yarn install
+bash scripts/setup.sh
+```
 
-# 2. Start Docker services
-docker compose up -d
+The setup script will:
+1. Copy `.env.example` → `.env`
+2. Install dependencies (`yarn install`)
+3. Generate local HTTPS certs with `mkcert`
+4. Start Docker services (Postgres, Redis, Nginx)
+5. Push the Prisma schema and seed the database
 
-# 3. Generate Prisma client & push schema
-yarn db:generate
-yarn db:push
+### 3. Add the local domain to `/etc/hosts`
 
-# 4. Seed the database
-yarn db:seed
+```bash
+sudo sh -c 'echo "127.0.0.1  my-app.local" >> /etc/hosts'
+```
 
-# 5. Add custom domain to hosts file
-sudo sh -c 'echo "127.0.0.1  friends.local" >> /etc/hosts'
+### 4. Start developing
 
-# 6. Start development
+```bash
 yarn dev
 ```
 
-Visit **http://friends.local** in your browser.
+Visit **https://my-app.local** in your browser.
+
+---
+
+## Manual Setup (without the script)
+
+```bash
+yarn install
+docker compose up -d
+yarn db:generate && yarn db:push && yarn db:seed
+yarn dev
+```
+
+---
 
 ## Commands
 
-| Command            | Description                    |
-| ------------------ | ------------------------------ |
-| `yarn dev`         | Start Next.js dev server       |
-| `yarn build`       | Build for production           |
-| `yarn docker:up`   | Start Postgres + Redis + Nginx |
-| `yarn docker:down` | Stop Docker services           |
-| `yarn docker:logs` | View Docker container logs     |
-| `yarn db:generate` | Generate Prisma client         |
-| `yarn db:push`     | Push schema to database        |
-| `yarn db:migrate`  | Create & run migrations        |
-| `yarn db:studio`   | Open Prisma Studio GUI         |
-| `yarn db:seed`     | Seed the database              |
+| Command                          | Description                       |
+| -------------------------------- | --------------------------------- |
+| `yarn init-project <name>`       | Rename boilerplate to your project |
+| `yarn dev`                       | Start Next.js dev server          |
+| `yarn build`                     | Build for production              |
+| `yarn test`                      | Run all tests                     |
+| `yarn test:coverage`             | Run tests with coverage report    |
+| `yarn lint`                      | Lint all packages                 |
+| `yarn docker:up`                 | Start Postgres + Redis + Nginx    |
+| `yarn docker:down`               | Stop Docker services              |
+| `yarn docker:logs`               | View Docker container logs        |
+| `yarn db:generate`               | Generate Prisma client            |
+| `yarn db:push`                   | Push schema to database           |
+| `yarn db:migrate`                | Create & run migrations           |
+| `yarn db:studio`                 | Open Prisma Studio GUI            |
+| `yarn db:seed`                   | Seed the database                 |
+| `yarn storybook`                 | Open the UI component explorer    |
 
-## Custom Domain
+## Environment Variables
 
-The Nginx reverse proxy maps `friends.local` → Next.js (port 3000).
+Copy `.env.example` to `.env` and fill in the values:
 
-Make sure your `/etc/hosts` contains:
-
-```
-127.0.0.1  friends.local
+```env
+DATABASE_URL=postgresql://boilerplate_user:change_me_in_production@localhost:5432/boilerplate_db
+REDIS_URL=redis://localhost:6379
+SESSION_SECRET=change_me_to_a_long_random_string
 ```
 
 ## Stack
 
-- **Next.js 15** — React framework (App Router)
-- **Prisma 6** — Type-safe database ORM
-- **PostgreSQL 16** — Primary database
-- **Redis 7** — Caching / sessions
-- **Nginx** — Reverse proxy with custom domain
-- **Turborepo** — Monorepo build orchestration
+| Layer | Technology |
+| ----- | ---------- |
+| Framework | Next.js 15 (App Router) |
+| ORM | Prisma 6 |
+| Database | PostgreSQL 16 |
+| Cache / Sessions | Redis 7 |
+| Reverse proxy | Nginx |
+| Auth | Custom (bcrypt + Redis sessions) |
+| i18n | next-intl |
+| UI | Custom `@boilerplate/ui` (Radix-based) |
+| Styling | Tailwind CSS |
+| Testing | Vitest + Testing Library |
+| Build system | Turborepo |
+| CI | GitHub Actions |

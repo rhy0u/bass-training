@@ -1,4 +1,4 @@
-import { Typography } from "@friends/ui/typography";
+import { Typography } from "@boilerplate/ui/typography";
 import Image from "next/image";
 
 export interface FieldRule {

@@ -1,6 +1,5 @@
-import { GroupRole, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import crypto from "crypto";
 
 const prisma = new PrismaClient();
 
@@ -8,42 +7,16 @@ const prisma = new PrismaClient();
 // │  Seed users – passwords listed below for dev/testing         │
 // │  (min 8 chars, uppercase, lowercase, digit, special char)    │
 // │                                                              │
-// │  alice@friends.local   →  password: "Alice123!"              │
-// │  bob@friends.local     →  password: "Bob12345!"              │
-// │  charlie@friends.local →  password: "Charlie1!"              │
-// │  diana@friends.local   →  password: "Diana123!"              │
-// │  eric@friends.local    →  password: "Eric1234!"              │
+// │  alice@example.local   →  password: "Alice123!"              │
+// │  bob@example.local     →  password: "Bob12345!"              │
 // └──────────────────────────────────────────────────────────────┘
 
 const SEED_USERS = [
-  { email: "alice@friends.local", name: "Alice Martin", password: "Alice123!" },
-  { email: "bob@friends.local", name: "Bob Dupont", password: "Bob12345!" },
-  { email: "charlie@friends.local", name: "Charlie Leroy", password: "Charlie1!" },
-  { email: "diana@friends.local", name: "Diana Moreau", password: "Diana123!" },
-  { email: "eric@friends.local", name: "Eric Bernard", password: "Eric1234!" },
-];
-
-const SEED_GROUPS = [
-  {
-    name: "Weekend Hikers",
-    ownerEmail: "alice@friends.local",
-    memberEmails: ["bob@friends.local", "charlie@friends.local"],
-  },
-  {
-    name: "Book Club",
-    ownerEmail: "bob@friends.local",
-    memberEmails: ["alice@friends.local", "diana@friends.local", "eric@friends.local"],
-  },
-  {
-    name: "Game Night",
-    ownerEmail: "charlie@friends.local",
-    memberEmails: ["alice@friends.local", "bob@friends.local", "diana@friends.local"],
-  },
+  { email: "alice@example.local", name: "Alice Martin", password: "Alice123!" },
+  { email: "bob@example.local", name: "Bob Dupont", password: "Bob12345!" },
 ];
 
 async function main() {
-  const users: Record<string, string> = {};
-
   for (const { email, name, password } of SEED_USERS) {
     const passwordHash = await bcrypt.hash(password, 12);
     const user = await prisma.user.upsert({
@@ -51,53 +24,7 @@ async function main() {
       update: { name, passwordHash },
       create: { email, name, passwordHash },
     });
-    users[email] = user.id;
     console.log(`Seeded user: ${user.name} (${user.email})`);
-  }
-
-  for (const { name, ownerEmail, memberEmails } of SEED_GROUPS) {
-    const ownerId = users[ownerEmail]!;
-    const group = await prisma.group.create({
-      data: {
-        name,
-        ownerId,
-        members: {
-          create: [
-            { userId: ownerId, role: GroupRole.ADMIN },
-            ...memberEmails.map((email) => ({ userId: users[email]! })),
-          ],
-        },
-      },
-    });
-
-    // Create an active invitation from the owner
-    const invitation = await prisma.invitation.create({
-      data: {
-        groupId: group.id,
-        inviterId: ownerId,
-        token: crypto.randomUUID(),
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
-      },
-    });
-
-    // Create "joined" notifications for the owner (simulating members who joined via invite)
-    for (const email of memberEmails) {
-      const memberName = SEED_USERS.find((u) => u.email === email)?.name ?? email;
-      await prisma.notification.create({
-        data: {
-          userId: ownerId,
-          type: "group_join",
-          title: "New member",
-          message: `${memberName} joined ${group.name}`,
-          link: `/groups/${group.id}`,
-          read: false,
-        },
-      });
-    }
-
-    console.log(
-      `Seeded group: ${group.name} (owner: ${ownerEmail}, members: ${memberEmails.length + 1}, invitation: ${invitation.token.slice(0, 8)}…)`,
-    );
   }
 }
 

@@ -50,7 +50,6 @@ describe("database index", () => {
 
   it("re-exports from @prisma/client", async () => {
     const mod = await import("./index");
-    // GroupRole is an enum exported by the schema
-    expect(mod.GroupRole).toBeDefined();
+    expect(mod.Prisma).toBeDefined();
   });
 });

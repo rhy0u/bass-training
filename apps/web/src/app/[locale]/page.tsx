@@ -1,5 +1,5 @@
-import { db } from "@friends/database";
-import { Typography } from "@friends/ui/typography";
+import { db } from "@boilerplate/database";
+import { Typography } from "@boilerplate/ui/typography";
 import { getTranslations } from "next-intl/server";
 
 export default async function Home() {

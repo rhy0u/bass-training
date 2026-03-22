@@ -23,7 +23,7 @@ import { ConfirmDialog, ConfirmDialogProps } from "./index";
  * ## Usage
  *
  * ```tsx
- * import { ConfirmDialog } from "@friends/ui/confirm-dialog";
+ * import { ConfirmDialog } from "@boilerplate/ui/confirm-dialog";
  *
  * <ConfirmDialog
  *   open={open}

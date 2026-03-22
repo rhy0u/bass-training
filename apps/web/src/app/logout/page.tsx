@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { Button } from "@friends/ui/button";
+import { Button } from "@boilerplate/ui/button";
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@friends/ui/card";
+} from "@boilerplate/ui/card";
 import { useTranslations } from "next-intl";
 import { signOut } from "../actions/auth";
 

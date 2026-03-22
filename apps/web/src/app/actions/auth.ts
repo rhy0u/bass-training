@@ -1,7 +1,7 @@
 "use server";
 
 import { createSession, destroySession } from "@/lib/session";
-import { db } from "@friends/database";
+import { db } from "@boilerplate/database";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 

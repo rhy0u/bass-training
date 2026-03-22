@@ -33,7 +33,7 @@ import { Button } from "../button";
  * import {
  *   MenuRoot, MenuTrigger, MenuPortal,
  *   MenuPositioner, MenuPopup, MenuItem,
- * } from "@friends/ui/menu";
+ * } from "@boilerplate/ui/menu";
  *
  * <MenuRoot>
  *   <MenuTrigger render={<Button>Open</Button>} />

@@ -1,4 +1,4 @@
-import uiPreset from "@friends/ui/tailwind.preset";
+import uiPreset from "@boilerplate/ui/tailwind.preset";
 import type { Config } from "tailwindcss";
 
 const config: Config = {

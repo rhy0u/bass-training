@@ -1,7 +1,7 @@
 "use client";
 
-import { Avatar } from "@friends/ui/avatar";
-import { Button } from "@friends/ui/button";
+import { Avatar } from "@boilerplate/ui/avatar";
+import { Button } from "@boilerplate/ui/button";
 import {
   Card,
   CardContent,
@@ -9,11 +9,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@friends/ui/card";
-import { Input } from "@friends/ui/input";
-import { Separator } from "@friends/ui/separator";
-import { toast } from "@friends/ui/toaster";
-import { Typography } from "@friends/ui/typography";
+} from "@boilerplate/ui/card";
+import { Input } from "@boilerplate/ui/input";
+import { Separator } from "@boilerplate/ui/separator";
+import { toast } from "@boilerplate/ui/toaster";
+import { Typography } from "@boilerplate/ui/typography";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { FieldError, type FieldRule } from "../../../components/field-error";

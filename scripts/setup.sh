@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "🚀 Setting up Friends project..."
+echo "🚀 Setting up Boilerplate project..."
 
 # 1. Copy env file if missing
 if [ ! -f .env ]; then
@@ -23,7 +23,7 @@ if ! command -v mkcert &> /dev/null; then
 fi
 mkcert -install
 cd docker/nginx/certs
-mkcert -key-file friends.local.key -cert-file friends.local.crt friends.local localhost 127.0.0.1
+mkcert -key-file boilerplate.local.key -cert-file boilerplate.local.crt boilerplate.local localhost 127.0.0.1
 cd -
 echo "✅ Certificates ready"
 
@@ -33,7 +33,7 @@ docker compose up -d
 
 # 4. Wait for Postgres to be ready
 echo "⏳ Waiting for PostgreSQL..."
-until docker compose exec postgres pg_isready -U friends_user -d friends_db > /dev/null 2>&1; do
+until docker compose exec postgres pg_isready -U boilerplate_user -d boilerplate_db > /dev/null 2>&1; do
   sleep 1
 done
 echo "✅ PostgreSQL is ready"
@@ -53,9 +53,9 @@ yarn db:seed
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "📋 Add this to your /etc/hosts file:"
-echo "   127.0.0.1  friends.local"
+echo "   127.0.0.1  boilerplate.local"
 echo ""
-echo "   sudo sh -c 'echo \"127.0.0.1  friends.local\" >> /etc/hosts'"
+echo "   sudo sh -c 'echo \"127.0.0.1  boilerplate.local\" >> /etc/hosts'"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
-echo "✅ Setup complete! Run 'yarn dev' and visit http://friends.local"
+echo "✅ Setup complete! Run 'yarn dev' and visit http://boilerplate.local"

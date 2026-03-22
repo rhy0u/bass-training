@@ -3,8 +3,8 @@ import { getLocale } from "next-intl/server";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Friends",
-  description: "Friends project",
+  title: "Boilerplate",
+  description: "Boilerplate project",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

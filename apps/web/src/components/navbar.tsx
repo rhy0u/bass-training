@@ -1,8 +1,8 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { Avatar } from "@friends/ui/avatar";
-import { Button } from "@friends/ui/button";
+import { Avatar } from "@boilerplate/ui/avatar";
+import { Button } from "@boilerplate/ui/button";
 import {
   MenuLinkItem,
   MenuPopup,
@@ -11,7 +11,7 @@ import {
   MenuRoot,
   MenuSeparator,
   MenuTrigger,
-} from "@friends/ui/menu";
+} from "@boilerplate/ui/menu";
 import { LocaleSwitcher } from "./locale-switcher";
 import { useTheme } from "./theme-provider";
 
@@ -20,51 +20,18 @@ interface NavbarProps {
     name?: string | null;
     avatar?: string | null;
   } | null;
-  unreadNotificationCount?: number;
   currentLocale: string;
   translations: {
     brand: string;
     signIn: string;
     signUp: string;
     profile: string;
-    groups: string;
-    notifications: string;
     logout: string;
     userMenu: string;
     lightMode: string;
     darkMode: string;
     language: string;
   };
-}
-
-function NotificationBell({ count, label }: Readonly<{ count: number; label: string }>) {
-  return (
-    <Link
-      href="/notifications"
-      className="relative rounded-md p-2 text-foreground-secondary hover:bg-surface-secondary hover:text-foreground transition-colors"
-      aria-label={label}
-      title={label}
-    >
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-      </svg>
-      {count > 0 && (
-        <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
-          {count > 99 ? "99+" : count}
-        </span>
-      )}
-    </Link>
-  );
 }
 
 function ThemeToggle({
@@ -124,7 +91,6 @@ function ThemeToggle({
 
 export function Navbar({
   user,
-  unreadNotificationCount = 0,
   currentLocale,
   translations,
 }: Readonly<NavbarProps>) {
@@ -144,10 +110,6 @@ export function Navbar({
           <ThemeToggle theme={theme} toggle={toggle} label={themeLabel} />
           {user ? (
             <>
-              <NotificationBell
-                count={unreadNotificationCount}
-                label={translations.notifications}
-              />
               <Link href="/profile" aria-label={translations.profile}>
                 <Avatar
                   src={user.avatar}
@@ -155,12 +117,6 @@ export function Navbar({
                   size="sm"
                   className="cursor-pointer"
                 />
-              </Link>
-              <Link
-                href="/groups"
-                className="text-sm text-foreground-secondary hover:text-foreground"
-              >
-                {translations.groups}
               </Link>
               <Link
                 href="/profile"
@@ -194,10 +150,6 @@ export function Navbar({
           <ThemeToggle theme={theme} toggle={toggle} label={themeLabel} />
           {user ? (
             <>
-              <NotificationBell
-                count={unreadNotificationCount}
-                label={translations.notifications}
-              />
               <MenuRoot>
                 <MenuTrigger
                   aria-label={translations.userMenu}
@@ -208,12 +160,6 @@ export function Navbar({
                 <MenuPortal>
                   <MenuPositioner align="end" sideOffset={8}>
                     <MenuPopup>
-                      <MenuLinkItem href={`/${currentLocale}/groups`}>
-                        {translations.groups}
-                      </MenuLinkItem>
-                      <MenuLinkItem href={`/${currentLocale}/notifications`}>
-                        {translations.notifications}
-                      </MenuLinkItem>
                       <MenuLinkItem href={`/${currentLocale}/profile`}>
                         {translations.profile}
                       </MenuLinkItem>

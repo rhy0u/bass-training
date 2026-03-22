@@ -15,7 +15,7 @@ import { Toaster, toast } from "./index";
  * ## Usage
  *
  * ```tsx
- * import { Toaster, toast } from "@friends/ui/toaster";
+ * import { Toaster, toast } from "@boilerplate/ui/toaster";
  *
  * // Mount once at root
  * <Toaster />

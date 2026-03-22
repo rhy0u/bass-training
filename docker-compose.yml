@@ -2,19 +2,19 @@ services:
   # ── PostgreSQL ──────────────────────────────────────────────
   postgres:
     image: postgres:16-alpine
-    container_name: friends-postgres
+    container_name: boilerplate-postgres
     restart: unless-stopped
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-friends_user}
+      POSTGRES_USER: ${POSTGRES_USER:-boilerplate_user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change_me_in_production}
-      POSTGRES_DB: ${POSTGRES_DB:-friends_db}
+      POSTGRES_DB: ${POSTGRES_DB:-boilerplate_db}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test:
-        ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-friends_user} -d ${POSTGRES_DB:-friends_db}"]
+        ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-boilerplate_user} -d ${POSTGRES_DB:-boilerplate_db}"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -22,7 +22,7 @@ services:
   # ── Redis ───────────────────────────────────────────────────
   redis:
     image: redis:7-alpine
-    container_name: friends-redis
+    container_name: boilerplate-redis
     restart: unless-stopped
     ports:
       - "${REDIS_PORT:-6379}:6379"
@@ -37,7 +37,7 @@ services:
   # ── Nginx Reverse Proxy ────────────────────────────────────
   nginx:
     image: nginx:alpine
-    container_name: friends-nginx
+    container_name: boilerplate-nginx
     restart: unless-stopped
     ports:
       - "80:80"

@@ -1,30 +1,31 @@
 {
-  "name": "friends",
+  "name": "boilerplate",
   "private": true,
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn workspace @friends/web dev",
-    "build": "yarn workspace @friends/web build",
-    "start": "yarn workspace @friends/web start",
+    "init-project": "bash scripts/init.sh",
+    "dev": "yarn workspace @boilerplate/web dev",
+    "build": "yarn workspace @boilerplate/web build",
+    "start": "yarn workspace @boilerplate/web start",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "turbo run test --log-order=grouped",
     "test:coverage": "turbo run test:coverage --log-order=grouped",
-    "db:generate": "yarn workspace @friends/database db:generate",
-    "db:push": "yarn workspace @friends/database db:push",
-    "db:migrate": "yarn workspace @friends/database db:migrate",
-    "db:studio": "yarn workspace @friends/database db:studio",
-    "db:seed": "yarn workspace @friends/database db:seed",
+    "db:generate": "yarn workspace @boilerplate/database db:generate",
+    "db:push": "yarn workspace @boilerplate/database db:push",
+    "db:migrate": "yarn workspace @boilerplate/database db:migrate",
+    "db:studio": "yarn workspace @boilerplate/database db:studio",
+    "db:seed": "yarn workspace @boilerplate/database db:seed",
     "docker:up": "docker compose up -d",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
     "docker:build": "docker compose build",
-    "storybook": "yarn workspace @friends/ui storybook"
+    "storybook": "yarn workspace @boilerplate/ui storybook"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -27,8 +27,8 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=prisma /app/node_modules/.prisma ./node_modules/.prisma
 COPY . .
 
-RUN yarn workspace @friends/database build
-RUN yarn workspace @friends/web build
+RUN yarn workspace @boilerplate/database build
+RUN yarn workspace @boilerplate/web build
 
 # ── Production ────────────────────────────────────────────
 FROM base AS runner

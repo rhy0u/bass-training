@@ -7,10 +7,6 @@ describe("NavbarServer", () => {
   });
 
   it("fetches user, locale, translations and passes to Navbar", async () => {
-    vi.doMock("@/app/actions/notifications", () => ({
-      getUnreadNotificationCount: vi.fn().mockResolvedValue(3),
-    }));
-
     vi.doMock("@/lib/auth", () => ({
       getCurrentUser: vi.fn().mockResolvedValue({
         name: "Test User",
@@ -35,20 +31,15 @@ describe("NavbarServer", () => {
     expect(mockNavbar).toHaveBeenCalledWith(
       expect.objectContaining({
         currentLocale: "en",
-        unreadNotificationCount: 3,
         user: { name: "Test User", avatar: null },
       }),
       undefined,
     );
   });
 
-  it("passes 0 unread count when no user", async () => {
+  it("passes null user when not authenticated", async () => {
     vi.doMock("@/lib/auth", () => ({
       getCurrentUser: vi.fn().mockResolvedValue(null),
-    }));
-
-    vi.doMock("@/app/actions/notifications", () => ({
-      getUnreadNotificationCount: vi.fn().mockResolvedValue(0),
     }));
 
     vi.doMock("next-intl/server", () => ({
@@ -68,7 +59,6 @@ describe("NavbarServer", () => {
     expect(mockNavbar).toHaveBeenCalledWith(
       expect.objectContaining({
         user: null,
-        unreadNotificationCount: 0,
       }),
       undefined,
     );

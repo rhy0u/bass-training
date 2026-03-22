@@ -9,17 +9,17 @@ vi.mock("@/i18n/navigation", () => ({
   ),
 }));
 
-vi.mock("@friends/ui/avatar", () => ({
+vi.mock("@boilerplate/ui/avatar", () => ({
   Avatar: ({ fallback }: { fallback: string }) => <div data-testid="avatar">{fallback}</div>,
 }));
 
-vi.mock("@friends/ui/button", () => ({
+vi.mock("@boilerplate/ui/button", () => ({
   Button: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
     <button {...props}>{children}</button>
   ),
 }));
 
-vi.mock("@friends/ui/menu", () => ({
+vi.mock("@boilerplate/ui/menu", () => ({
   MenuRoot: ({ children }: React.PropsWithChildren) => <div>{children}</div>,
   MenuTrigger: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
     <button data-testid="user-menu-trigger" {...props}>
@@ -56,12 +56,10 @@ vi.mock("@/components/theme-provider", () => ({
 import { Navbar } from "@/components/navbar";
 
 const baseTranslations = {
-  brand: "Friends",
+  brand: "Boilerplate",
   signIn: "Sign In",
   signUp: "Sign Up",
   profile: "Profile",
-  groups: "Groups",
-  notifications: "Notifications",
   logout: "Logout",
   userMenu: "User Menu",
   lightMode: "Light Mode",
@@ -77,7 +75,7 @@ describe("Navbar", () => {
 
   it("renders brand link", () => {
     render(<Navbar currentLocale="en" translations={baseTranslations} />);
-    expect(screen.getByText("Friends")).toBeDefined();
+    expect(screen.getByText("Boilerplate")).toBeDefined();
   });
 
   it("renders sign in/up buttons when no user", () => {
@@ -90,37 +88,11 @@ describe("Navbar", () => {
     render(
       <Navbar
         user={{ name: "Alice", avatar: null }}
-        unreadNotificationCount={5}
         currentLocale="en"
         translations={baseTranslations}
       />,
     );
-    expect(screen.getAllByText("Groups").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Logout").length).toBeGreaterThan(0);
-  });
-
-  it("renders notification count badge", () => {
-    render(
-      <Navbar
-        user={{ name: "Alice", avatar: null }}
-        unreadNotificationCount={5}
-        currentLocale="en"
-        translations={baseTranslations}
-      />,
-    );
-    expect(screen.getAllByText("5").length).toBeGreaterThan(0);
-  });
-
-  it("renders 99+ for large notification counts", () => {
-    render(
-      <Navbar
-        user={{ name: "Alice", avatar: null }}
-        unreadNotificationCount={150}
-        currentLocale="en"
-        translations={baseTranslations}
-      />,
-    );
-    expect(screen.getAllByText("99+").length).toBeGreaterThan(0);
   });
 
   it("renders dark mode toggle", () => {
@@ -134,7 +106,6 @@ describe("Navbar", () => {
     render(
       <Navbar
         user={{ name: "Alice", avatar: null }}
-        unreadNotificationCount={0}
         currentLocale="en"
         translations={baseTranslations}
       />,
