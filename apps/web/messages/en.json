@@ -1,15 +1,15 @@
 {
   "home": {
-    "title": "Boilerplate",
-    "welcome": "Welcome to the Boilerplate project.",
+    "title": "Bass Training",
+    "welcome": "Welcome to the Bass Training project.",
     "usersCount": "Users in database: {count}"
   },
   "metadata": {
-    "title": "Boilerplate",
-    "description": "Boilerplate project"
+    "title": "Bass Training",
+    "description": "Bass Training project"
   },
   "navbar": {
-    "brand": "Boilerplate",
+    "brand": "Bass Training",
     "signIn": "Sign in",
     "signUp": "Sign up",
     "profile": "Profile",
@@ -102,5 +102,20 @@
     "hintSpecial": "One special character",
     "changePasswordSubmit": "Update password",
     "passwordChanged": "Password updated successfully."
+  },
+  "quiz": {
+    "title": "Note Translation Quiz",
+    "description": "Test your knowledge of note names! Translate from English (A, B, C…) to Latin notation (do, ré, mi…).",
+    "rules": "How it works:",
+    "ruleQuestions": "{count} random questions",
+    "ruleTime": "{seconds} seconds per question",
+    "ruleTranslate": "Translate the displayed note to Latin notation",
+    "start": "Start Quiz",
+    "questionProgress": "{current} / {total}",
+    "resultsTitle": "Results",
+    "score": "{score} / {total} correct",
+    "timeout": "Time's up",
+    "averageTime": "Average response time: {time}s",
+    "retry": "Try Again"
   }
 }

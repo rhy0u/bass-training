@@ -1,5 +1,5 @@
 {
-  "name": "@boilerplate/web",
+  "name": "@bass-training/web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,8 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@boilerplate/database": "*",
-    "@boilerplate/ui": "*",
+    "@bass-training/database": "*",
+    "@bass-training/ui": "*",
     "@tailwindcss/postcss": "^4.2.1",
     "@upstash/redis": "^1.36.4",
     "bcryptjs": "^3.0.3",

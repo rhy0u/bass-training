@@ -1,4 +1,4 @@
-/** @boilerplate/ui shared Tailwind theme preset */
+/** @bass-training/ui shared Tailwind theme preset */
 import type { Config } from "tailwindcss";
 
 const preset: Config = {

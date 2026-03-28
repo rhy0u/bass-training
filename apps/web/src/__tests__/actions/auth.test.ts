@@ -15,7 +15,7 @@ const mockDb = {
   },
 };
 
-vi.mock("@boilerplate/database", () => ({
+vi.mock("@bass-training/database", () => ({
   db: mockDb,
 }));
 

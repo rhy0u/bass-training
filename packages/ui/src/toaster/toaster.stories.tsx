@@ -15,7 +15,7 @@ import { Toaster, toast } from "./index";
  * ## Usage
  *
  * ```tsx
- * import { Toaster, toast } from "@boilerplate/ui/toaster";
+ * import { Toaster, toast } from "@bass-training/ui/toaster";
  *
  * // Mount once at root
  * <Toaster />

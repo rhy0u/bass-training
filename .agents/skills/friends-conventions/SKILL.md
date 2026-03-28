@@ -1,16 +1,16 @@
 ---
-name: boilerplate-conventions
-description: Coding conventions for the Boilerplate monorepo. Use Typography from @boilerplate/ui instead of raw HTML tags (p, h1, h2, etc.). Extract reusable form components (FieldError, PasswordHint) into apps/web/src/components/. Use next-intl for all user-facing strings. Follow mobile-first responsive patterns with the xs/sm/md/lg/xl breakpoints from the Tailwind preset.
+name: bass-training-conventions
+description: Coding conventions for the Bass Training monorepo. Use Typography from @bass-training/ui instead of raw HTML tags (p, h1, h2, etc.). Extract reusable form components (FieldError, PasswordHint) into apps/web/src/components/. Use next-intl for all user-facing strings. Follow mobile-first responsive patterns with the xs/sm/md/lg/xl breakpoints from the Tailwind preset.
 ---
 
-# Boilerplate Project Conventions
+# Bass Training Project Conventions
 
 ## Typography
 
-Always use the `Typography` component from `@boilerplate/ui/typography` instead of raw HTML elements (`<p>`, `<h1>`, `<span>`, etc.).
+Always use the `Typography` component from `@bass-training/ui/typography` instead of raw HTML elements (`<p>`, `<h1>`, `<span>`, etc.).
 
 ```tsx
-import { Typography } from "@boilerplate/ui/typography";
+import { Typography } from "@bass-training/ui/typography";
 
 // ✅ Correct
 <Typography variant="body-sm" className="text-red-500">Error message</Typography>
@@ -40,7 +40,7 @@ const t = useTranslations("signUp");
 
 ## UI Components
 
-All shared UI primitives are in `packages/ui/src/` (buttons, cards, inputs, dialogs, etc.) and exported as `@boilerplate/ui/<component>`.
+All shared UI primitives are in `packages/ui/src/` (buttons, cards, inputs, dialogs, etc.) and exported as `@bass-training/ui/<component>`.
 
 ## Validation
 

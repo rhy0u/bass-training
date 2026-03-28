@@ -1,12 +1,12 @@
-# Boilerplate
+# Bass Training
 
-A full-stack monorepo boilerplate with **Next.js**, **Prisma**, **PostgreSQL**, **Redis**, **Nginx**, and built-in auth — ready to rename and ship.
+A full-stack monorepo bass-training with **Next.js**, **Prisma**, **PostgreSQL**, **Redis**, **Nginx**, and built-in auth — ready to rename and ship.
 
 ## Features
 
 - **Authentication** — Sign-up, sign-in, session management (Redis), profile & password update
 - **i18n** — 5 languages (EN, FR, DE, ES, PT) via `next-intl`
-- **UI package** — Shared component library (`@boilerplate/ui`) with Storybook & Chromatic
+- **UI package** — Shared component library (`@bass-training/ui`) with Storybook & Chromatic
 - **Dark mode** — Flash-free theme toggle persisted in `localStorage`
 - **Database** — Prisma + PostgreSQL with a pre-wired singleton client
 - **Reverse proxy** — Nginx with custom local domain and HTTPS via `mkcert`
@@ -16,7 +16,7 @@ A full-stack monorepo boilerplate with **Next.js**, **Prisma**, **PostgreSQL**, 
 ## Architecture
 
 ```
-boilerplate/
+bass-training/
 ├── apps/
 │   └── web/                    # Next.js 15 application (App Router)
 │       ├── src/
@@ -37,9 +37,9 @@ boilerplate/
 │   └── nginx/                  # Reverse proxy
 │       ├── nginx.conf
 │       └── conf.d/
-│           └── boilerplate.conf
+│           └── bass-training.conf
 ├── scripts/
-│   ├── init.sh                 # 🔑 Rename boilerplate → your project
+│   ├── init.sh                 # 🔑 Rename bass-training → your project
 │   └── setup.sh                # First-run setup (deps, Docker, DB, certs)
 ├── docker-compose.yml          # Postgres + Redis + Nginx
 ├── turbo.json                  # Turborepo pipeline
@@ -51,7 +51,7 @@ boilerplate/
 ### 1. Rename the project
 
 ```bash
-# Replaces every "boilerplate" reference with your project name
+# Replaces every "bass-training" reference with your project name
 yarn init-project my-app
 # or with spaces (auto-converts to slug + PascalCase)
 yarn init-project "My App"
@@ -103,7 +103,7 @@ yarn dev
 
 | Command                          | Description                       |
 | -------------------------------- | --------------------------------- |
-| `yarn init-project <name>`       | Rename boilerplate to your project |
+| `yarn init-project <name>`       | Rename bass-training to your project |
 | `yarn dev`                       | Start Next.js dev server          |
 | `yarn build`                     | Build for production              |
 | `yarn test`                      | Run all tests                     |
@@ -124,7 +124,7 @@ yarn dev
 Copy `.env.example` to `.env` and fill in the values:
 
 ```env
-DATABASE_URL=postgresql://boilerplate_user:change_me_in_production@localhost:5432/boilerplate_db
+DATABASE_URL=postgresql://bass-training_user:change_me_in_production@localhost:5432/bass-training_db
 REDIS_URL=redis://localhost:6379
 SESSION_SECRET=change_me_to_a_long_random_string
 ```
@@ -140,7 +140,7 @@ SESSION_SECRET=change_me_to_a_long_random_string
 | Reverse proxy | Nginx |
 | Auth | Custom (bcrypt + Redis sessions) |
 | i18n | next-intl |
-| UI | Custom `@boilerplate/ui` (Radix-based) |
+| UI | Custom `@bass-training/ui` (Radix-based) |
 | Styling | Tailwind CSS |
 | Testing | Vitest + Testing Library |
 | Build system | Turborepo |

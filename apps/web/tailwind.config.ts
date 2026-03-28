@@ -1,4 +1,4 @@
-import uiPreset from "@boilerplate/ui/tailwind.preset";
+import uiPreset from "@bass-training/ui/tailwind.preset";
 import type { Config } from "tailwindcss";
 
 const config: Config = {

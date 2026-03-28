@@ -9,17 +9,17 @@ vi.mock("@/i18n/navigation", () => ({
   ),
 }));
 
-vi.mock("@boilerplate/ui/avatar", () => ({
+vi.mock("@bass-training/ui/avatar", () => ({
   Avatar: ({ fallback }: { fallback: string }) => <div data-testid="avatar">{fallback}</div>,
 }));
 
-vi.mock("@boilerplate/ui/button", () => ({
+vi.mock("@bass-training/ui/button", () => ({
   Button: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
     <button {...props}>{children}</button>
   ),
 }));
 
-vi.mock("@boilerplate/ui/menu", () => ({
+vi.mock("@bass-training/ui/menu", () => ({
   MenuRoot: ({ children }: React.PropsWithChildren) => <div>{children}</div>,
   MenuTrigger: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
     <button data-testid="user-menu-trigger" {...props}>
@@ -56,7 +56,7 @@ vi.mock("@/components/theme-provider", () => ({
 import { Navbar } from "@/components/navbar";
 
 const baseTranslations = {
-  brand: "Boilerplate",
+  brand: "Bass Training",
   signIn: "Sign In",
   signUp: "Sign Up",
   profile: "Profile",
@@ -75,7 +75,7 @@ describe("Navbar", () => {
 
   it("renders brand link", () => {
     render(<Navbar currentLocale="en" translations={baseTranslations} />);
-    expect(screen.getByText("Boilerplate")).toBeDefined();
+    expect(screen.getByText("Bass Training")).toBeDefined();
   });
 
   it("renders sign in/up buttons when no user", () => {

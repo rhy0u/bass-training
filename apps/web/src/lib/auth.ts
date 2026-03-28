@@ -1,4 +1,4 @@
-import { db } from "@boilerplate/database";
+import { db } from "@bass-training/database";
 import { getSession } from "./session";
 
 export async function getCurrentUser() {

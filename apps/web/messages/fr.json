@@ -1,15 +1,15 @@
 {
   "home": {
-    "title": "Boilerplate",
-    "welcome": "Bienvenue sur le projet Boilerplate.",
+    "title": "Bass Training",
+    "welcome": "Bienvenue sur le projet Bass Training.",
     "usersCount": "Utilisateurs en base : {count}"
   },
   "metadata": {
-    "title": "Boilerplate",
-    "description": "Projet Boilerplate"
+    "title": "Bass Training",
+    "description": "Projet Bass Training"
   },
   "navbar": {
-    "brand": "Boilerplate",
+    "brand": "Bass Training",
     "signIn": "Connexion",
     "signUp": "Inscription",
     "profile": "Profil",
@@ -102,5 +102,20 @@
     "hintSpecial": "Un caractère spécial",
     "changePasswordSubmit": "Mettre à jour le mot de passe",
     "passwordChanged": "Mot de passe mis à jour avec succès."
+  },
+  "quiz": {
+    "title": "Quiz de notation musicale",
+    "description": "Testez vos connaissances des noms de notes ! Traduisez de la notation anglaise (A, B, C…) vers la notation latine (do, ré, mi…).",
+    "rules": "Comment ça marche :",
+    "ruleQuestions": "{count} questions aléatoires",
+    "ruleTime": "{seconds} secondes par question",
+    "ruleTranslate": "Traduisez la note affichée en notation latine",
+    "start": "Commencer le quiz",
+    "questionProgress": "{current} / {total}",
+    "resultsTitle": "Résultats",
+    "score": "{score} / {total} bonnes réponses",
+    "timeout": "Temps écoulé",
+    "averageTime": "Temps de réponse moyen : {time}s",
+    "retry": "Réessayer"
   }
 }

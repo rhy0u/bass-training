@@ -33,7 +33,7 @@ import { Button } from "../button";
  * import {
  *   MenuRoot, MenuTrigger, MenuPortal,
  *   MenuPositioner, MenuPopup, MenuItem,
- * } from "@boilerplate/ui/menu";
+ * } from "@bass-training/ui/menu";
  *
  * <MenuRoot>
  *   <MenuTrigger render={<Button>Open</Button>} />

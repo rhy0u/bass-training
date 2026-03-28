@@ -1,7 +1,6 @@
 import js from "@eslint/js";
 import nextConfig from "eslint-config-next";
 import prettierConfig from "eslint-config-prettier";
-import prettierPlugin from "eslint-plugin-prettier";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
@@ -30,22 +29,16 @@ export default tseslint.config(
     files: ["apps/web/**/*.{ts,tsx,js,jsx,mjs}"],
     ...(cfg.rules?.["@next/next/no-html-link-for-pages"]
       ? {
-          rules: {
-            ...cfg.rules,
-            "@next/next/no-html-link-for-pages": ["error", "apps/web/src/app"],
-          },
-        }
+        rules: {
+          ...cfg.rules,
+          "@next/next/no-html-link-for-pages": ["error", "apps/web/src/app"],
+        },
+      }
       : {}),
   })),
 
-  /* ── Prettier (must be last) ────────────────────── */
+  /* ── Prettier – disable conflicting rules (must be last) */
   prettierConfig,
-  {
-    plugins: { prettier: prettierPlugin },
-    rules: {
-      "prettier/prettier": "warn",
-    },
-  },
 
   /* ── Project-specific rules ─────────────────────── */
   {

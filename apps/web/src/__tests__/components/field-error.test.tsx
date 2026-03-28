@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-vi.mock("@boilerplate/ui/typography", () => ({
+vi.mock("@bass-training/ui/typography", () => ({
   Typography: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
     <span {...props}>{children}</span>
   ),

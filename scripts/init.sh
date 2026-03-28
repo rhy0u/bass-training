@@ -64,10 +64,10 @@ for f in "$CERTS_DIR"/boilerplate.*; do
   echo "✅ Renamed $f → $NEW_F"
 done
 
-# ── Text replacements in all source files ────────────────────
-# Order matters: longer/specific variants first to avoid partial replacements
+
+# ── Text replacements in all source and env files ─────────────
 python3 - "$SLUG" "$PASCAL" << 'PYEOF'
-import os, sys
+import os, sys, re
 
 slug  = sys.argv[1]   # e.g. my-app
 pascal = sys.argv[2]  # e.g. MyApp
@@ -92,7 +92,8 @@ for dirpath, dirnames, filenames in os.walk(root):
   dirnames[:] = [d for d in dirnames if d not in skip_dirs]
   for fname in filenames:
     _, ext = os.path.splitext(fname)
-    if ext not in exts and fname not in explicit_names:
+    # Always include .env, .env.local, .env.example, etc.
+    if (ext not in exts and fname not in explicit_names and not fname.startswith('.env')):
       continue
     fpath = os.path.join(dirpath, fname)
     try:
@@ -103,6 +104,14 @@ for dirpath, dirnames, filenames in os.walk(root):
     new_content = content
     for old, new in pairs:
       new_content = new_content.replace(old, new)
+    # Special handling for DATABASE_URL and NEXT_PUBLIC_APP_URL in .env* files
+    if fname.startswith('.env'):
+      # Replace user/db in DATABASE_URL
+      new_content = re.sub(r'DATABASE_URL=postgresql://[^:]+:([^@]+)@localhost:5432/[^?]+\?schema=public',
+        f'DATABASE_URL=postgresql://{slug}_user:\1@localhost:5432/{slug}_db?schema=public', new_content)
+      # Replace NEXT_PUBLIC_APP_URL
+      new_content = re.sub(r'NEXT_PUBLIC_APP_URL=https://[\w.-]+',
+        f'NEXT_PUBLIC_APP_URL=https://{slug}.local', new_content)
     if new_content != content:
       with open(fpath, 'w', encoding='utf-8') as f:
         f.write(new_content)

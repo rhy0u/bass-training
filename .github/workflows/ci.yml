@@ -21,8 +21,8 @@ jobs:
           node-version: 20
           cache: yarn
       - run: yarn install --frozen-lockfile
-      - run: yarn workspace @boilerplate/database db:generate
-      - run: yarn workspace @boilerplate/database build
+      - run: yarn workspace @bass-training/database db:generate
+      - run: yarn workspace @bass-training/database build
       - uses: actions/cache/save@v4
         with:
           path: |
@@ -93,9 +93,9 @@ jobs:
             packages/database/node_modules/.prisma
           key: deps-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
       - run: npx playwright install chromium --with-deps
-      - run: yarn workspace @boilerplate/ui test:coverage
-      - run: yarn workspace @boilerplate/web test:coverage
-      - run: yarn workspace @boilerplate/database test:coverage
+      - run: yarn workspace @bass-training/ui test:coverage
+      - run: yarn workspace @bass-training/web test:coverage
+      - run: yarn workspace @bass-training/database test:coverage
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -159,7 +159,7 @@ jobs:
             packages/database/dist
             packages/database/node_modules/.prisma
           key: deps-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
-      - run: yarn workspace @boilerplate/ui chromatic
+      - run: yarn workspace @bass-training/ui chromatic
         env:
           CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 

@@ -22,7 +22,7 @@ vi.mock("next/image", () => ({
   ),
 }));
 
-vi.mock("@boilerplate/ui/menu", () => ({
+vi.mock("@bass-training/ui/menu", () => ({
   MenuRoot: ({ children }: React.PropsWithChildren) => (
     <div data-testid="menu-root">{children}</div>
   ),

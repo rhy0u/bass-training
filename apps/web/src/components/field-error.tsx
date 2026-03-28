@@ -1,4 +1,4 @@
-import { Typography } from "@boilerplate/ui/typography";
+import { Typography } from "@bass-training/ui/typography";
 import Image from "next/image";
 
 export interface FieldRule {

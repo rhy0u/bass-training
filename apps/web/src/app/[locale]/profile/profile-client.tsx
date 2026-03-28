@@ -1,7 +1,7 @@
 "use client";
 
-import { Avatar } from "@boilerplate/ui/avatar";
-import { Button } from "@boilerplate/ui/button";
+import { Avatar } from "@bass-training/ui/avatar";
+import { Button } from "@bass-training/ui/button";
 import {
   Card,
   CardContent,
@@ -9,11 +9,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@boilerplate/ui/card";
-import { Input } from "@boilerplate/ui/input";
-import { Separator } from "@boilerplate/ui/separator";
-import { toast } from "@boilerplate/ui/toaster";
-import { Typography } from "@boilerplate/ui/typography";
+} from "@bass-training/ui/card";
+import { Input } from "@bass-training/ui/input";
+import { Separator } from "@bass-training/ui/separator";
+import { toast } from "@bass-training/ui/toaster";
+import { Typography } from "@bass-training/ui/typography";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { FieldError, type FieldRule } from "../../../components/field-error";

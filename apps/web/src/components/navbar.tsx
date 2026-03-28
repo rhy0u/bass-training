@@ -1,8 +1,8 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { Avatar } from "@boilerplate/ui/avatar";
-import { Button } from "@boilerplate/ui/button";
+import { Avatar } from "@bass-training/ui/avatar";
+import { Button } from "@bass-training/ui/button";
 import {
   MenuLinkItem,
   MenuPopup,
@@ -11,7 +11,7 @@ import {
   MenuRoot,
   MenuSeparator,
   MenuTrigger,
-} from "@boilerplate/ui/menu";
+} from "@bass-training/ui/menu";
 import { LocaleSwitcher } from "./locale-switcher";
 import { useTheme } from "./theme-provider";
 

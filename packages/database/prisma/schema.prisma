@@ -16,5 +16,20 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  quizResults QuizResult[]
+
   @@map("users")
+}
+
+model QuizResult {
+  id             String   @id @default(cuid())
+  userId         String   @map("user_id")
+  score          Int
+  totalQuestions Int      @map("total_questions")
+  averageTimeMs  Int      @map("average_time_ms")
+  createdAt      DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("quiz_results")
 }

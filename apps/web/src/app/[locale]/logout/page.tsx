@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { Button } from "@boilerplate/ui/button";
+import { Button } from "@bass-training/ui/button";
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@boilerplate/ui/card";
+} from "@bass-training/ui/card";
 import { useTranslations } from "next-intl";
 import { signOut } from "../../actions/auth";
 

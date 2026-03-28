@@ -1,7 +1,7 @@
 import { NavbarServer } from "@/components/navbar-server";
 import { ThemeProvider } from "@/components/theme-provider";
 import { routing } from "@/i18n/routing";
-import { Toaster } from "@boilerplate/ui/toaster";
+import { Toaster } from "@bass-training/ui/toaster";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
