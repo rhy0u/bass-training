@@ -3,7 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { QuizClient } from "./quiz-client";
 
 export async function generateMetadata() {
-  const t = await getTranslations("quiz");
+  const t = await getTranslations("notationQuiz");
   return { title: t("title") };
 }
 

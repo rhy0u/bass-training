@@ -17,7 +17,11 @@
     "userMenu": "Menu do utilizador",
     "lightMode": "Mudar para modo claro",
     "darkMode": "Mudar para modo escuro",
-    "language": "Mudar idioma"
+    "language": "Mudar idioma",
+    "notationQuiz": "Quiz notação",
+    "fretboardQuiz": "Quiz braço",
+    "leaderboard": "Classificação",
+    "myScores": "Minhas pontuações"
   },
   "signIn": {
     "title": "Entrar",
@@ -103,7 +107,7 @@
     "changePasswordSubmit": "Atualizar palavra-passe",
     "passwordChanged": "Palavra-passe atualizada com sucesso."
   },
-  "quiz": {
+  "notationQuiz": {
     "title": "Quiz de notação musical",
     "description": "Teste os seus conhecimentos sobre nomes de notas! Traduza da notação inglesa (A, B, C…) para a notação latina (do, ré, mi…).",
     "rules": "Como funciona:",
@@ -117,5 +121,47 @@
     "timeout": "Tempo esgotado",
     "averageTime": "Tempo médio de resposta: {time}s",
     "retry": "Tentar novamente"
+  },
+  "fretboardQuiz": {
+    "title": "Quiz do braço",
+    "description": "Encontre as notas no braço do baixo! Clique na posição correta para a nota solicitada.",
+    "rules": "Como funciona:",
+    "ruleQuestions": "{count} perguntas aleatórias",
+    "ruleTime": "{seconds} segundos por pergunta",
+    "ruleFind": "Clique no traste correto para a nota na corda indicada",
+    "start": "Iniciar quiz",
+    "questionProgress": "{current} / {total}",
+    "findNote": "Encontre {note} na corda {string}",
+    "resultsTitle": "Resultados",
+    "score": "{score} / {total} corretas",
+    "timeout": "Tempo esgotado",
+    "averageTime": "Tempo médio de resposta: {time}s",
+    "retry": "Tentar novamente",
+    "correct": "Correto!",
+    "wrong": "Errado! Era o traste {fret}"
+  },
+  "leaderboard": {
+    "title": "Classificação",
+    "description": "Melhores pontuações de todos os jogadores.",
+    "tabNotation": "Notação",
+    "tabFretboard": "Braço",
+    "empty": "Ainda sem pontuações. Seja o primeiro a jogar!",
+    "player": "Jogador",
+    "scoreLabel": "Pontuação",
+    "time": "Tempo méd.",
+    "anonymous": "Anónimo"
+  },
+  "myScores": {
+    "title": "Minhas pontuações",
+    "description": "O seu histórico de quizzes e melhores resultados.",
+    "tabNotation": "Notação",
+    "tabFretboard": "Braço",
+    "empty": "Ainda não jogou nenhum quiz.",
+    "totalGames": "Jogos",
+    "bestScore": "Melhor pontuação",
+    "bestTime": "Melhor tempo",
+    "date": "Data",
+    "scoreLabel": "Pontuação",
+    "time": "Tempo méd."
   }
 }

@@ -17,7 +17,11 @@
     "userMenu": "Menu utilisateur",
     "lightMode": "Passer en mode clair",
     "darkMode": "Passer en mode sombre",
-    "language": "Changer de langue"
+    "language": "Changer de langue",
+    "notationQuiz": "Quiz notation",
+    "fretboardQuiz": "Quiz manche",
+    "leaderboard": "Classement",
+    "myScores": "Mes scores"
   },
   "signIn": {
     "title": "Connexion",
@@ -103,7 +107,7 @@
     "changePasswordSubmit": "Mettre à jour le mot de passe",
     "passwordChanged": "Mot de passe mis à jour avec succès."
   },
-  "quiz": {
+  "notationQuiz": {
     "title": "Quiz de notation musicale",
     "description": "Testez vos connaissances des noms de notes ! Traduisez de la notation anglaise (A, B, C…) vers la notation latine (do, ré, mi…).",
     "rules": "Comment ça marche :",
@@ -117,5 +121,47 @@
     "timeout": "Temps écoulé",
     "averageTime": "Temps de réponse moyen : {time}s",
     "retry": "Réessayer"
+  },
+  "fretboardQuiz": {
+    "title": "Quiz du manche",
+    "description": "Trouvez les notes sur le manche de la basse ! Cliquez sur la bonne position pour la note demandée.",
+    "rules": "Comment ça marche :",
+    "ruleQuestions": "{count} questions aléatoires",
+    "ruleTime": "{seconds} secondes par question",
+    "ruleFind": "Cliquez sur la bonne frette pour la note sur la corde indiquée",
+    "start": "Commencer le quiz",
+    "questionProgress": "{current} / {total}",
+    "findNote": "Trouvez {note} sur la corde {string}",
+    "resultsTitle": "Résultats",
+    "score": "{score} / {total} bonnes réponses",
+    "timeout": "Temps écoulé",
+    "averageTime": "Temps de réponse moyen : {time}s",
+    "retry": "Réessayer",
+    "correct": "Correct !",
+    "wrong": "Faux ! C'était la frette {fret}"
+  },
+  "leaderboard": {
+    "title": "Classement",
+    "description": "Meilleurs scores de tous les joueurs.",
+    "tabNotation": "Notation",
+    "tabFretboard": "Manche",
+    "empty": "Aucun score pour le moment. Soyez le premier à jouer !",
+    "player": "Joueur",
+    "scoreLabel": "Score",
+    "time": "Temps moy.",
+    "anonymous": "Anonyme"
+  },
+  "myScores": {
+    "title": "Mes scores",
+    "description": "Votre historique de quiz et vos meilleurs résultats.",
+    "tabNotation": "Notation",
+    "tabFretboard": "Manche",
+    "empty": "Vous n'avez pas encore joué de quiz.",
+    "totalGames": "Parties",
+    "bestScore": "Meilleur score",
+    "bestTime": "Meilleur temps",
+    "date": "Date",
+    "scoreLabel": "Score",
+    "time": "Temps moy."
   }
 }

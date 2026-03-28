@@ -17,7 +17,11 @@
     "userMenu": "Benutzermenü",
     "lightMode": "Zum hellen Modus wechseln",
     "darkMode": "Zum dunklen Modus wechseln",
-    "language": "Sprache ändern"
+    "language": "Sprache ändern",
+    "notationQuiz": "Notation Quiz",
+    "fretboardQuiz": "Griffbrett Quiz",
+    "leaderboard": "Bestenliste",
+    "myScores": "Meine Ergebnisse"
   },
   "signIn": {
     "title": "Anmelden",
@@ -103,7 +107,7 @@
     "changePasswordSubmit": "Passwort aktualisieren",
     "passwordChanged": "Passwort erfolgreich aktualisiert."
   },
-  "quiz": {
+  "notationQuiz": {
     "title": "Notennamen-Quiz",
     "description": "Testen Sie Ihr Wissen über Notennamen! Übersetzen Sie von englischer (A, B, C…) in lateinische Notation (do, ré, mi…).",
     "rules": "So funktioniert es:",
@@ -117,5 +121,47 @@
     "timeout": "Zeit abgelaufen",
     "averageTime": "Durchschnittliche Antwortzeit: {time}s",
     "retry": "Nochmal versuchen"
+  },
+  "fretboardQuiz": {
+    "title": "Griffbrett-Quiz",
+    "description": "Finden Sie Noten auf dem Bass-Griffbrett! Klicken Sie auf die richtige Position für die gesuchte Note.",
+    "rules": "So funktioniert es:",
+    "ruleQuestions": "{count} zufällige Fragen",
+    "ruleTime": "{seconds} Sekunden pro Frage",
+    "ruleFind": "Klicken Sie auf den richtigen Bund für die Note auf der angegebenen Saite",
+    "start": "Quiz starten",
+    "questionProgress": "{current} / {total}",
+    "findNote": "{note} auf der {string}-Saite finden",
+    "resultsTitle": "Ergebnisse",
+    "score": "{score} / {total} richtig",
+    "timeout": "Zeit abgelaufen",
+    "averageTime": "Durchschnittliche Antwortzeit: {time}s",
+    "retry": "Nochmal versuchen",
+    "correct": "Richtig!",
+    "wrong": "Falsch! Es war Bund {fret}"
+  },
+  "leaderboard": {
+    "title": "Bestenliste",
+    "description": "Top-Ergebnisse aller Spieler.",
+    "tabNotation": "Notation",
+    "tabFretboard": "Griffbrett",
+    "empty": "Noch keine Ergebnisse. Sei der Erste!",
+    "player": "Spieler",
+    "scoreLabel": "Punkte",
+    "time": "Ø Zeit",
+    "anonymous": "Anonym"
+  },
+  "myScores": {
+    "title": "Meine Ergebnisse",
+    "description": "Dein Quiz-Verlauf und persönliche Bestleistungen.",
+    "tabNotation": "Notation",
+    "tabFretboard": "Griffbrett",
+    "empty": "Du hast noch kein Quiz gespielt.",
+    "totalGames": "Spiele",
+    "bestScore": "Bestes Ergebnis",
+    "bestTime": "Beste Zeit",
+    "date": "Datum",
+    "scoreLabel": "Punkte",
+    "time": "Ø Zeit"
   }
 }

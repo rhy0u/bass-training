@@ -24,6 +24,7 @@ model User {
 model QuizResult {
   id             String   @id @default(cuid())
   userId         String   @map("user_id")
+  quizType       String   @default("notation") @map("quiz_type")
   score          Int
   totalQuestions Int      @map("total_questions")
   averageTimeMs  Int      @map("average_time_ms")

@@ -166,7 +166,7 @@ function quizReducer(state: QuizState, action: QuizAction): QuizState {
 // ─── Component ────────────────────────────────────────
 
 export function QuizClient({ isLoggedIn }: Readonly<{ isLoggedIn: boolean }>) {
-  const t = useTranslations("quiz");
+  const t = useTranslations("notationQuiz");
   const [state, dispatch] = useReducer(quizReducer, initialState);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const savedRef = useRef(false);
@@ -205,6 +205,7 @@ export function QuizClient({ isLoggedIn }: Readonly<{ isLoggedIn: boolean }>) {
     if (phase !== "results" || !isLoggedIn || savedRef.current) return;
     savedRef.current = true;
     saveQuizResult({
+      quizType: "notation",
       score,
       totalQuestions: TOTAL_QUESTIONS,
       averageTimeMs: averageTimeMs,
@@ -296,8 +297,8 @@ export function QuizClient({ isLoggedIn }: Readonly<{ isLoggedIn: boolean }>) {
                 <div
                   key={i}
                   className={`flex items-center justify-between rounded-lg px-4 py-2 ${r.isCorrect
-                      ? "bg-green-500/10 text-green-700 dark:text-green-400"
-                      : "bg-red-500/10 text-red-700 dark:text-red-400"
+                    ? "bg-green-500/10 text-green-700 dark:text-green-400"
+                    : "bg-red-500/10 text-red-700 dark:text-red-400"
                     }`}
                 >
                   <span className="font-mono font-semibold w-8">{r.note}</span>

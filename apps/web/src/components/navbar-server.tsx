@@ -21,6 +21,10 @@ export async function NavbarServer() {
         lightMode: t("lightMode"),
         darkMode: t("darkMode"),
         language: t("language"),
+        notationQuiz: t("notationQuiz"),
+        fretboardQuiz: t("fretboardQuiz"),
+        leaderboard: t("leaderboard"),
+        myScores: t("myScores"),
       }}
     />
   );

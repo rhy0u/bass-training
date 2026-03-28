@@ -31,6 +31,10 @@ interface NavbarProps {
     lightMode: string;
     darkMode: string;
     language: string;
+    notationQuiz: string;
+    fretboardQuiz: string;
+    leaderboard: string;
+    myScores: string;
   };
 }
 
@@ -104,6 +108,36 @@ export function Navbar({
           {translations.brand}
         </Link>
 
+        {/* Page links */}
+        <div className="hidden items-center gap-1 md:flex">
+          <Link
+            href="/notation-quiz"
+            className="rounded-md px-3 py-1.5 text-sm text-foreground-secondary hover:bg-surface-secondary hover:text-foreground transition-colors"
+          >
+            {translations.notationQuiz}
+          </Link>
+          <Link
+            href="/fretboard-quiz"
+            className="rounded-md px-3 py-1.5 text-sm text-foreground-secondary hover:bg-surface-secondary hover:text-foreground transition-colors"
+          >
+            {translations.fretboardQuiz}
+          </Link>
+          <Link
+            href="/leaderboard"
+            className="rounded-md px-3 py-1.5 text-sm text-foreground-secondary hover:bg-surface-secondary hover:text-foreground transition-colors"
+          >
+            {translations.leaderboard}
+          </Link>
+          {user && (
+            <Link
+              href="/my-scores"
+              className="rounded-md px-3 py-1.5 text-sm text-foreground-secondary hover:bg-surface-secondary hover:text-foreground transition-colors"
+            >
+              {translations.myScores}
+            </Link>
+          )}
+        </div>
+
         {/* Desktop nav */}
         <div className="hidden items-center gap-3 md:flex">
           <LocaleSwitcher label={translations.language} />
@@ -160,6 +194,19 @@ export function Navbar({
                 <MenuPortal>
                   <MenuPositioner align="end" sideOffset={8}>
                     <MenuPopup>
+                      <MenuLinkItem href={`/${currentLocale}/notation-quiz`}>
+                        {translations.notationQuiz}
+                      </MenuLinkItem>
+                      <MenuLinkItem href={`/${currentLocale}/fretboard-quiz`}>
+                        {translations.fretboardQuiz}
+                      </MenuLinkItem>
+                      <MenuLinkItem href={`/${currentLocale}/leaderboard`}>
+                        {translations.leaderboard}
+                      </MenuLinkItem>
+                      <MenuLinkItem href={`/${currentLocale}/my-scores`}>
+                        {translations.myScores}
+                      </MenuLinkItem>
+                      <MenuSeparator />
                       <MenuLinkItem href={`/${currentLocale}/profile`}>
                         {translations.profile}
                       </MenuLinkItem>
@@ -174,6 +221,16 @@ export function Navbar({
             </>
           ) : (
             <>
+              <Link href="/notation-quiz">
+                <Button variant="ghost" size="sm">
+                  {translations.notationQuiz}
+                </Button>
+              </Link>
+              <Link href="/fretboard-quiz">
+                <Button variant="ghost" size="sm">
+                  {translations.fretboardQuiz}
+                </Button>
+              </Link>
               <Link href="/sign-in">
                 <Button variant="ghost" size="sm">
                   {translations.signIn}

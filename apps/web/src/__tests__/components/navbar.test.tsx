@@ -50,7 +50,7 @@ vi.mock("@/components/locale-switcher", () => ({
 }));
 
 vi.mock("@/components/theme-provider", () => ({
-  useTheme: (...args: unknown[]) => mockUseTheme(...args),
+  useTheme: () => mockUseTheme(),
 }));
 
 import { Navbar } from "@/components/navbar";
@@ -65,6 +65,10 @@ const baseTranslations = {
   lightMode: "Light Mode",
   darkMode: "Dark Mode",
   language: "Language",
+  notationQuiz: "Notation Quiz",
+  fretboardQuiz: "Fretboard Quiz",
+  leaderboard: "Leaderboard",
+  myScores: "My Scores",
 };
 
 describe("Navbar", () => {

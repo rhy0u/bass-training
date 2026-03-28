@@ -17,7 +17,11 @@
     "userMenu": "User menu",
     "lightMode": "Switch to light mode",
     "darkMode": "Switch to dark mode",
-    "language": "Change language"
+    "language": "Change language",
+    "notationQuiz": "Notation Quiz",
+    "fretboardQuiz": "Fretboard Quiz",
+    "leaderboard": "Leaderboard",
+    "myScores": "My Scores"
   },
   "signIn": {
     "title": "Sign in",
@@ -103,7 +107,7 @@
     "changePasswordSubmit": "Update password",
     "passwordChanged": "Password updated successfully."
   },
-  "quiz": {
+  "notationQuiz": {
     "title": "Note Translation Quiz",
     "description": "Test your knowledge of note names! Translate from English (A, B, C…) to Latin notation (do, ré, mi…).",
     "rules": "How it works:",
@@ -117,5 +121,47 @@
     "timeout": "Time's up",
     "averageTime": "Average response time: {time}s",
     "retry": "Try Again"
+  },
+  "fretboardQuiz": {
+    "title": "Fretboard Quiz",
+    "description": "Find notes on the bass fretboard! Click the correct position for the requested note.",
+    "rules": "How it works:",
+    "ruleQuestions": "{count} random questions",
+    "ruleTime": "{seconds} seconds per question",
+    "ruleFind": "Click the correct fret for the note on the indicated string",
+    "start": "Start Quiz",
+    "questionProgress": "{current} / {total}",
+    "findNote": "Find {note} on the {string} string",
+    "resultsTitle": "Results",
+    "score": "{score} / {total} correct",
+    "timeout": "Time's up",
+    "averageTime": "Average response time: {time}s",
+    "retry": "Try Again",
+    "correct": "Correct!",
+    "wrong": "Wrong! It was fret {fret}"
+  },
+  "leaderboard": {
+    "title": "Leaderboard",
+    "description": "Top quiz scores from all players.",
+    "tabNotation": "Notation",
+    "tabFretboard": "Fretboard",
+    "empty": "No scores yet. Be the first to play!",
+    "player": "Player",
+    "scoreLabel": "Score",
+    "time": "Avg time",
+    "anonymous": "Anonymous"
+  },
+  "myScores": {
+    "title": "My Scores",
+    "description": "Your quiz history and personal bests.",
+    "tabNotation": "Notation",
+    "tabFretboard": "Fretboard",
+    "empty": "You haven't played any quizzes yet.",
+    "totalGames": "Games",
+    "bestScore": "Best score",
+    "bestTime": "Best time",
+    "date": "Date",
+    "scoreLabel": "Score",
+    "time": "Avg time"
   }
 }
